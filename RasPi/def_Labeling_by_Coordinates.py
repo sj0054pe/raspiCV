@@ -188,7 +188,7 @@ def pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season):
     #print("Yesterday : ", Latest_Coordinates_List)
     return Latest_Coordinates_List
 
-def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List):
+def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List,Season):
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     with open("Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
