@@ -54,7 +54,7 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     try:
         contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     except:
-        contours=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+        _,contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
     Conventional_Area_List = []
     Conventional_Area_List=Calculate_the_Area(contours, theDate, Season) #def
