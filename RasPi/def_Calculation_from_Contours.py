@@ -65,7 +65,7 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     Today_Coordinates_List.insert(0,str(theDate))
 
     #輪郭をプロットする部分。
-    frame=cv2.imread('Assets/Assets_Input/%s' % fname) #生画像 #ディレクトリはデスクトップ
+    frame=cv2.imread('../../%s' % fname) #生画像 #ディレクトリはデスクトップ
     #frame=img #for Presentation
     modified_imgforshow=ndimage.median_filter(frame, 1)
     fig, ax = plt.subplots(figsize=(6, 6))

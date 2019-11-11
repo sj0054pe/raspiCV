@@ -3,7 +3,7 @@ import numpy as np
 
 def change_the_color(fname): #カラー画像を緑&黒の画像にする
     print("ファイル名：", fname)
-    frame=cv2.imread('Assets/Assets_Input/%s' % fname)
+    frame=cv2.imread('../../%s' % fname)
     # フレームをHSVに変換
     hsv=cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # 取得する色の範囲を指定する
