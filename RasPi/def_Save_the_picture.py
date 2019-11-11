@@ -7,7 +7,8 @@ def Upload_on_Dropbox(API, Picname, RasPi_SerialNum): #DropboxのAPIを利用す
     Desktop_Picname=Picname
     Picname=Picname.split('.')
     Picname=str(Picname[0])+'_'+RasPi_SerialNum+'.png'
-    f = open('Assets/Assets_Output/%s' % Desktop_Picname, 'rb')
+    print(Picname)
+    f = open('../../%s' % Desktop_Picname, 'rb')
     Area_or_not=Desktop_Picname.split('_')
     print("------")
     if Area_or_not[0]=='Area':
