@@ -201,7 +201,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
 
     print("-----結果------")
     print(range(int(len(Checked_Today_Area_List))))
-    frame_with_contours=cv2.imread('../../Contours_on_%s' % fname) #デスクトップ
+    frame_with_contours=cv2.imread('~/Desktop/Contours_on_%s' % fname) #デスクトップ
     print("aaaaaa")
     for i in range(int(len(Checked_Today_Area_List))):
         print(i)
