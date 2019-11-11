@@ -9,6 +9,7 @@ def Upload_on_Dropbox(API, Picname, RasPi_SerialNum): #DropboxのAPIを利用す
     Picname=str(Picname[0])+'_'+RasPi_SerialNum+'.png'
     f = open('Assets/Assets_Output/%s' % Desktop_Picname, 'rb')
     Area_or_not=Desktop_Picname.split('_')
+    print("------")
     if Area_or_not[0]=='Area':
         dbx.files_upload(f.read(),'/Dropbox/アプリ/Mapoly_Filter_%s/%s' % (RasPi_SerialNum,Desktop_Picname)) #dropbox内のディレクトリを書く
     else:
