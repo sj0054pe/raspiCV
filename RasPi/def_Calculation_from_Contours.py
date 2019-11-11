@@ -34,7 +34,7 @@ def Calculate_the_Area(contours,theDate, Season): #輪郭(cnt)から面積を導
         #Area_List.append(sub_Area_List)
         Area_List.append(area)
         #print("日付：", theDate)
-    Area_List.insert(0,str(theDate)]) #一番最初に日付を挿入。
+    Area_List.insert(0,str(theDate)) #一番最初に日付を挿入。
     print("-",len(contours), "個検出しました。-")
     #print("面積(輪郭)：", Conventional_Area_List)
     Record_Area(Area_List, Season)
