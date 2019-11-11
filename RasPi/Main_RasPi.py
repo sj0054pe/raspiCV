@@ -13,7 +13,8 @@ try:
     Season="S8"
 
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
-
+    print("RasPi-CPU : ", RasPi_SerialNum)
+    
     fname, theDate = def_datetime.check_the_date(Season)
 
     fname = def_Take_the_picture.take_the_picture(fname)
