@@ -285,6 +285,7 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
     else: #前日の座標があった場合
         print("Checked_Today_Area_Listの作成開始")
         for element in Checked_Today_Coordinates_List: #element=座標
+            print(element)
             if re.search("-", element):
                 continue
             elif re.match("NA", str(element)): #不要の可能性あり
