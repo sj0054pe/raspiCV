@@ -74,7 +74,6 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
         print(Conventional_Area_List[i])
         try:
             Area=Conventional_Area_List[i]
-            print(num,Area)
             Today_Record_List_When_Latest_Data_is_None.append(Area)
             Today_Record_List_When_Latest_Data_is_None.append(Today_Coordinates_List[i])
         except:
