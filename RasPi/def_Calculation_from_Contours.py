@@ -27,17 +27,13 @@ def Calculate_the_Area(contours,theDate, Season): #輪郭(cnt)から面積を導
     for i, cnt in enumerate(contours):
         # 輪郭の面積を計算する。
         area = cv2.contourArea(cnt)
-        #file.write('contour: {}, area: {}'.format(i, area))
-        sub_Area_List=[]
-        num=(len(contours)-1)-i #新しいラベリング処理方法に合わせてサンプルの上から番号を添付するように変更。
-        #print(num)
-        sub_Area_List.append(num)
-        sub_Area_List.append(area)
-        #print(sub_Area_List)
-        Area_List.append(sub_Area_List)
-        #print('contour: {}, area: {}'.format(i, area))
-    #Area_List_reversed=Area_List[::-1]
-    print("日付：", theDate)
+        #sub_Area_List=[]
+        #num=(len(contours)-1)-i #新しいラベリング処理方法に合わせてサンプルの上から番号を添付するように変更。
+        #sub_Area_List.append(num)
+        #sub_Area_List.append(area)
+        #Area_List.append(sub_Area_List)
+        Area_List.append(area)
+        print("日付：", theDate)
     Area_List.insert(0,[str(theDate),str(theDate)]) #一番最初に日付を挿入。
     print("-",len(contours), "個検出しました。-")
     #print("面積(輪郭)：", Conventional_Area_List)
@@ -77,7 +73,7 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
         print(Today_Coordinates_List[i])
         print(Conventional_Area_List[i])
         try:
-            [num, Area]=Conventional_Area_List[i]
+            Area=Conventional_Area_List[i]
             print(num,Area)
             Today_Record_List_When_Latest_Data_is_None.append(Area)
             Today_Record_List_When_Latest_Data_is_None.append(Today_Coordinates_List[i])
