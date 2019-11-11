@@ -220,7 +220,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
 
     # 画像の保存
     cv2.imwrite('../../pre_Area_%s' % fname, frame_with_contours) #デスクトップ
-    subprocess.getoutput('convert -trim ../../pre_Area_%s Assets/Assets_Output/Area_%s' % (fname, fname)) #デスクトップ
+    subprocess.getoutput('convert -trim ../../pre_Area_%s ../../Area_%s' % (fname, fname)) #デスクトップ
     os.remove('../../pre_Area_%s' % fname) #デスクトップ
 
 def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None): #画像上にデータを付与する
