@@ -50,7 +50,11 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     img = cv2.imread('../../Green.png') #デスクトップ
     #↓面積導出関数へ渡す。
     gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #緑色を白、背景を黒にした二値化をする。(そうしないと輪郭抽出や他のOpenCVの関数で扱いずらい。)
-    contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+
+    try:
+        contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    except:
+        contours=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
     Conventional_Area_List = []
     Conventional_Area_List=Calculate_the_Area(contours, theDate, Season) #def
