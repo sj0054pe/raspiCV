@@ -133,7 +133,6 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
 
         return Checked_Today_Coordinates_List
 
-
 def make_Header(Season):
     Header=[]
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
@@ -240,26 +239,6 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
         if re.search("-", Today_Coordinates_List[i]):
             continue
         Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
-
-    '''
-    #比較するため今日の面積と中心座標をリストと辞書にする。
-    Today_Record_List_When_Latest_Data_is_None=[] #前日の比較する座標がなかった時にcsvファイルに保存する用
-    Today_Dict={}
-    #for i in range(int(len(Today_Coordinates_List))):
-    for i in range(8):
-        try:
-            [num, Area]=Conventional_Area_List[i]
-            Today_Record_List_When_Latest_Data_is_None.append(Area)
-            Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
-            if re.search("-", Today_Coordinates_List[i]):
-                continue
-            Today_Record_List_When_Latest_Data_is_None.append(Today_Coordinates_List[i])
-        except:
-            Today_Record_List_When_Latest_Data_is_None.extend(["NA","NA"])
-    #print("前日と比較前：", Today_Dict)
-    print("Today_Record_List_When_Latest_Data_is_None", Today_Record_List_When_Latest_Data_is_None)
-    #Today_Record_List_When_Latest_Data_is_None.insert(0,str(theDate)) #一番最初に日付を挿入。
-    '''
 
     Checked_Today_Record_List=[]
     Checked_Today_Area_List=[]
