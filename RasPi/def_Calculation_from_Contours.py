@@ -14,7 +14,7 @@ def Record_Area(Area_List, Season): #とりあえず従来の方法で面積デ�
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     csv_List=[]
     for Elements in Area_List:
-        [Contours_num, Contours_Area]=Elements
+        Contours_Area=Elements
         csv_List.append(Contours_Area)
     with open('Assets/Assets_Output/Conventional_Record_%s_on_%s.csv' % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
@@ -33,7 +33,7 @@ def Calculate_the_Area(contours,theDate, Season): #輪郭(cnt)から面積を導
         #sub_Area_List.append(area)
         #Area_List.append(sub_Area_List)
         Area_List.append(area)
-        print("日付：", theDate)
+        #print("日付：", theDate)
     Area_List.insert(0,[str(theDate),str(theDate)]) #一番最初に日付を挿入。
     print("-",len(contours), "個検出しました。-")
     #print("面積(輪郭)：", Conventional_Area_List)
