@@ -68,6 +68,8 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     #Today_Coordinates_List=Today_Coordinates_List[::-1]
     Today_Coordinates_List.insert(0,str(theDate))
 
+    print("Today_Area_List : ", Today_Area_List)
+    print("Today_Coordinates_List : ", Today_Coordinates_List)
 
     #比較するため今日の面積と中心座標をリストと辞書にする。
     Today_Record_List_When_Latest_Data_is_None=[] #前日の比較する座標がなかった時にcsvファイルに保存する用
@@ -82,7 +84,6 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
             Today_Record_List_When_Latest_Data_is_None.extend(["NA","NA"])
     print("Today_Record_List_When_Latest_Data_is_None", Today_Record_List_When_Latest_Data_is_None)
     #Today_Record_List_When_Latest_Data_is_None.insert(0,str(theDate)) #一番最初に日付を挿入。
-
 
     #輪郭をプロットする部分。
     frame=cv2.imread('../../%s' % fname) #生画像 #ディレクトリはデスクトップ
