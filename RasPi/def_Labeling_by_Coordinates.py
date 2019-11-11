@@ -194,7 +194,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
         csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), sep=",")
     except: #観察初日は参照する前日のデータがないので、csvファイルのヘッダーを作るところから始める。
         make_Header(Season)
-        
+
     with open("Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
         writer.writerow(Checked_Today_Record_List)
@@ -235,10 +235,10 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
     Today_Dict={}
     #for i in range(int(len(Today_Coordinates_List))):
     for i in range(8):
-        [num, Area]=Conventional_Area_List[i]
-        Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
+        Area=Conventional_Area_List[i]
         if re.search("-", Today_Coordinates_List[i]):
             continue
+        Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
 
     '''
     #比較するため今日の面積と中心座標をリストと辞書にする。
