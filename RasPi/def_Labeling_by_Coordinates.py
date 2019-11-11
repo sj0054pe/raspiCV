@@ -193,7 +193,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
     with open("Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
         writer.writerow(Checked_Today_Record_List)
-        #print("Today : ", Today_Coordinates_List)
+        #print("Todayと : ", Today_Coordinates_List)
 
     print("Checked_Today_Record_List : ", Checked_Today_Record_List)
     print("Checked_Today_Area_List : ", Checked_Today_Area_List)
