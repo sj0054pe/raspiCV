@@ -124,8 +124,8 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
                     break
                 Checked_Today_Coordinates_List[count_for_Checked]=Loser_ToCoordinates_List[count_for_Loser]
                 count_for_Loser=count_for_Loser+1
-            #print(count_for_Checked)
-            #print(count_for_Loser)
+            print(count_for_Checked)
+            print(count_for_Loser)
             count_for_Checked=count_for_Checked+1
 
         Checked_Today_Coordinates_List.insert(0,Today_Coordinates_List[0])
