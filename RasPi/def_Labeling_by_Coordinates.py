@@ -129,6 +129,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
             count_for_Checked=count_for_Checked+1
 
         Checked_Today_Coordinates_List.insert(0,Today_Coordinates_List[0])
+        print('Checked_Today_Coordinates_List : ', Checked_Today_Coordinates_List)
 
         return Checked_Today_Coordinates_List
 
@@ -282,6 +283,7 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
         Checked_Today_Coordinates_List.insert(0,str(theDate))
 
     else: #前日の座標があった場合
+        print("Checked_Today_Area_Listの作成開始")
         for element in Checked_Today_Coordinates_List: #element=座標
             if re.search("-", element):
                 continue
