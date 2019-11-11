@@ -34,7 +34,7 @@ def Calculate_the_Area(contours,theDate, Season): #輪郭(cnt)から面積を導
         #Area_List.append(sub_Area_List)
         Area_List.append(area)
         #print("日付：", theDate)
-    Area_List.insert(0,[str(theDate),str(theDate)]) #一番最初に日付を挿入。
+    Area_List.insert(0,str(theDate)]) #一番最初に日付を挿入。
     print("-",len(contours), "個検出しました。-")
     #print("面積(輪郭)：", Conventional_Area_List)
     Record_Area(Area_List, Season)
@@ -79,7 +79,7 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
         except:
             Today_Record_List_When_Latest_Data_is_None.extend(["NA","NA"])
     print("Today_Record_List_When_Latest_Data_is_None", Today_Record_List_When_Latest_Data_is_None)
-    #Today_Record_List_When_Latest_Data_is_None.insert(0,str(theDate)) #一番最初に日付を挿入。
+    Today_Record_List_When_Latest_Data_is_None.insert(0,str(theDate)) #一番最初に日付を挿入。
 
     #輪郭をプロットする部分。
     frame=cv2.imread('../../%s' % fname) #生画像 #ディレクトリはデスクトップ
