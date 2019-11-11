@@ -77,7 +77,8 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
         print(Today_Coordinates_List[i])
         print(Conventional_Area_List[i])
         try:
-            if re.search("-", Today_Coordinates_List[i]):
+            [date1, date2]=Today_Coordinates_List[i]
+            if re.search("-", date1):
                 print('日付はスキップします。')
                 continue
             [num, Area]=Conventional_Area_List[i]
