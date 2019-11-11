@@ -74,6 +74,7 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     #比較するため今日の面積と中心座標をリストと辞書にする。
     Today_Record_List_When_Latest_Data_is_None=[] #前日の比較する座標がなかった時にcsvファイルに保存する用
     for i in range(int(len(Today_Coordinates_List))):
+        print(Today_Coordinates_List[i])
         try:
             if re.search("-", Today_Coordinates_List[i]):
                 continue
