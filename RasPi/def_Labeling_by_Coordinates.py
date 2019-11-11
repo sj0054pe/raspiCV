@@ -8,7 +8,7 @@ import subprocess
 import pandas as pd
 import math
 
-import def_6_Identifying_RasPi
+import def_Identifying_RasPi
 
 def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate):
     if Yesterday_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
@@ -135,7 +135,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
 
 def make_Header(Season):
     Header=[]
-    RasPi_SerialNum=def_6_Identifying_RasPi.Get_Serial()
+    RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     for i in range(7+1):
         if i == 0:
             Header.append("Date")
@@ -148,7 +148,7 @@ def make_Header(Season):
 
 #csvファイルに保存されている直近の日付のデータを取り出す。
 def pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season):
-    RasPi_SerialNum=def_6_Identifying_RasPi.Get_Serial()
+    RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     try:
         csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), sep=",")
     except: #観察初日は参照する前日のデータがないので、csvファイルのヘッダーを作るところから始める。
@@ -241,7 +241,7 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
             Checked_Today_Record_List.extend([Today_Dict["%s" % element], element])
             Checked_Today_Area_List.append(Today_Dict["%s" % element])
 
-    RasPi_SerialNum=def_6_Identifying_RasPi.Get_Serial()
+    RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     with open("Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
         writer.writerow(Checked_Today_Record_List)
