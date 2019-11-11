@@ -10,11 +10,11 @@ import def_finish
 
 try:
     progress_num=0
-    Season="S7"
+    Season="S8"
 
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
 
-    fname, theDate = def_datetime.check_the_date()
+    fname, theDate = def_datetime.check_the_date(Season)
 
     fname = def_Take_the_picture.take_the_picture(fname)
 
