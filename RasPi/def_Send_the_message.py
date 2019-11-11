@@ -8,6 +8,7 @@ def send_message(RasPi_SerialNumber, fname, Checked_Today_Area_List): #LINEのAP
     Picname_LINE="Area_" + fname
     Area_7=''
     j=0
+    print("making message...")
     for i in Checked_Today_Area_List:
         Area_7=Area_7+str(j)+'_'+str(i)+'\n'
         j+=1
