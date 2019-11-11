@@ -47,7 +47,7 @@ try:
         print()
     except:
         print('error 変更前のデータを記録します。')
-        def_Labeling_by_Coordinates.Record(Today_Record_List_When_Latest_Data_is_None, Conventional_Area_List, Today_Coordinates_List, Season)
+        def_Labeling_by_Coordinates.Record(Today_Record_List_When_Latest_Data_is_None, Conventional_Area_List, Today_Coordinates_List, Season, fname)
 
     print("Sanding messeges...")
     def_Send_the_message.send_message(RasPi_SerialNum, fname, Checked_Today_Area_List) #本番
