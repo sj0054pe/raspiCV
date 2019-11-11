@@ -75,10 +75,11 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     Today_Record_List_When_Latest_Data_is_None=[] #前日の比較する座標がなかった時にcsvファイルに保存する用
     for i in range(int(len(Today_Coordinates_List))):
         try:
-            [num, Area]=Conventional_Area_List[i]
-            Today_Record_List_When_Latest_Data_is_None.append(Area)
             if re.search("-", Today_Coordinates_List[i]):
                 continue
+            [num, Area]=Conventional_Area_List[i]
+            print(num,Area)
+            Today_Record_List_When_Latest_Data_is_None.append(Area)
             Today_Record_List_When_Latest_Data_is_None.append(Today_Coordinates_List[i])
         except:
             Today_Record_List_When_Latest_Data_is_None.extend(["NA","NA"])
