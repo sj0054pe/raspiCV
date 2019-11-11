@@ -283,7 +283,6 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
         Checked_Today_Coordinates_List.insert(0,str(theDate))
 
     else: #前日の座標があった場合
-        print("Checked_Today_Area_Listの作成開始")
         for element in Checked_Today_Coordinates_List: #element=座標
             print(element)
             if re.search("-", element):
@@ -294,7 +293,6 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
                 continue
             Checked_Today_Record_List.extend([Today_Dict["%s" % element], element])
             Checked_Today_Area_List.append(Today_Dict["%s" % element])
-        print("Checked_Today_Area_Listの作成終了")
 
-    Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List)
+    Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List, Season, fname)
     return Checked_Today_Area_List
