@@ -120,7 +120,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
             print('Coordinates : ', element)
             if element =="NA":
                 print("NA発見")
-                if (count_for_Checked) > (len(Loser_ToCoordinates_List)-1):
+                if (count_for_Checked) > (len(Loser_ToCoordinates_List)):
                     break
                 Checked_Today_Coordinates_List[count_for_Checked]=Loser_ToCoordinates_List[count_for_Loser]
                 count_for_Loser=count_for_Loser+1
