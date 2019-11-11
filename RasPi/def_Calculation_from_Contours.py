@@ -68,7 +68,7 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     #Today_Coordinates_List=Today_Coordinates_List[::-1]
     Today_Coordinates_List.insert(0,str(theDate))
 
-    print("Today_Area_List : ", Today_Area_List)
+    print("Today_Area_List : ", Conventional_Area_List)
     print("Today_Coordinates_List : ", Today_Coordinates_List)
 
     #比較するため今日の面積と中心座標をリストと辞書にする。
