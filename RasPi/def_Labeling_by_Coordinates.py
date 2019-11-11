@@ -188,59 +188,7 @@ def pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season):
     #print("Yesterday : ", Latest_Coordinates_List)
     return Latest_Coordinates_List
 
-
-def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season): #画像上にデータを付与する
-    #Date=datetime.date.today()
-    #比較するため今日の面積と中心座標をリストと辞書にする。
-    Today_Record_List_When_Latest_Data_is_None=[] #前日の比較する座標がなかった時にcsvファイルに保存する用
-    Today_Dict={}
-    #for i in range(int(len(Today_Coordinates_List))):
-    for i in range(8):
-        try:
-            [num, Area]=Conventional_Area_List[i]
-            Today_Record_List_When_Latest_Data_is_None.append(Area)
-            Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
-            if re.search("-", Today_Coordinates_List[i]):
-                continue
-            Today_Record_List_When_Latest_Data_is_None.append(Today_Coordinates_List[i])
-        except:
-            Today_Record_List_When_Latest_Data_is_None.extend(["NA","NA"])
-    #print("前日と比較前：", Today_Dict)
-    print("Today_Record_List_When_Latest_Data_is_None", Today_Record_List_When_Latest_Data_is_None)
-    #Today_Record_List_When_Latest_Data_is_None.insert(0,str(theDate)) #一番最初に日付を挿入。
-
-    Checked_Today_Record_List=[]
-    Checked_Today_Area_List=[]
-    Checked_Today_Record_List.insert(0,str(theDate))
-    Checked_Today_Area_List.insert(0,str(theDate))
-
-    Yesterday_Coordinates_List=pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season)
-    Checked_Today_Coordinates_List=Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate)
-    if Checked_Today_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
-        Checked_Today_Coordinates_List=[]
-        Checked_Today_Coordinates_List.clear()
-        Checked_Today_Record_List=Today_Record_List_When_Latest_Data_is_None
-        for element in Checked_Today_Record_List:
-            if re.search("-", str(element)):
-                continue
-            elif re.search(",", str(element)):
-                Checked_Today_Coordinates_List.append(element)
-            else:
-                Checked_Today_Area_List.append(element)
-                print(Checked_Today_Area_List)
-        Checked_Today_Coordinates_List.insert(0,str(theDate))
-
-    else: #前日の座標があった場合
-        for element in Checked_Today_Coordinates_List: #element=座標
-            if re.search("-", element):
-                continue
-            elif re.match("NA", str(element)): #不要の可能性あり
-                Checked_Today_Record_List.extend(["NA", "NA"])
-                Checked_Today_Area_List.append("NA")
-                continue
-            Checked_Today_Record_List.extend([Today_Dict["%s" % element], element])
-            Checked_Today_Area_List.append(Today_Dict["%s" % element])
-
+def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List):
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     with open("Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
@@ -274,4 +222,69 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
     subprocess.getoutput('convert -trim ../../pre_Area_%s Assets/Assets_Output/Area_%s' % (fname, fname)) #デスクトップ
     os.remove('../../pre_Area_%s' % fname) #デスクトップ
 
+def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None): #画像上にデータを付与する
+    #Date=datetime.date.today()
+
+    #比較するため今日の面積と中心座標をリストと辞書にする。
+    Today_Dict={}
+    #for i in range(int(len(Today_Coordinates_List))):
+    for i in range(8):
+        [num, Area]=Conventional_Area_List[i]
+        Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
+        if re.search("-", Today_Coordinates_List[i]):
+            continue
+
+    '''
+    #比較するため今日の面積と中心座標をリストと辞書にする。
+    Today_Record_List_When_Latest_Data_is_None=[] #前日の比較する座標がなかった時にcsvファイルに保存する用
+    Today_Dict={}
+    #for i in range(int(len(Today_Coordinates_List))):
+    for i in range(8):
+        try:
+            [num, Area]=Conventional_Area_List[i]
+            Today_Record_List_When_Latest_Data_is_None.append(Area)
+            Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
+            if re.search("-", Today_Coordinates_List[i]):
+                continue
+            Today_Record_List_When_Latest_Data_is_None.append(Today_Coordinates_List[i])
+        except:
+            Today_Record_List_When_Latest_Data_is_None.extend(["NA","NA"])
+    #print("前日と比較前：", Today_Dict)
+    print("Today_Record_List_When_Latest_Data_is_None", Today_Record_List_When_Latest_Data_is_None)
+    #Today_Record_List_When_Latest_Data_is_None.insert(0,str(theDate)) #一番最初に日付を挿入。
+    '''
+
+    Checked_Today_Record_List=[]
+    Checked_Today_Area_List=[]
+    Checked_Today_Record_List.insert(0,str(theDate))
+    Checked_Today_Area_List.insert(0,str(theDate))
+
+    Yesterday_Coordinates_List=pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season)
+    Checked_Today_Coordinates_List=Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate)
+    if Checked_Today_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
+        Checked_Today_Coordinates_List=[]
+        Checked_Today_Coordinates_List.clear()
+        Checked_Today_Record_List=Today_Record_List_When_Latest_Data_is_None
+        for element in Checked_Today_Record_List:
+            if re.search("-", str(element)):
+                continue
+            elif re.search(",", str(element)):
+                Checked_Today_Coordinates_List.append(element)
+            else:
+                Checked_Today_Area_List.append(element)
+                print(Checked_Today_Area_List)
+        Checked_Today_Coordinates_List.insert(0,str(theDate))
+
+    else: #前日の座標があった場合
+        for element in Checked_Today_Coordinates_List: #element=座標
+            if re.search("-", element):
+                continue
+            elif re.match("NA", str(element)): #不要の可能性あり
+                Checked_Today_Record_List.extend(["NA", "NA"])
+                Checked_Today_Area_List.append("NA")
+                continue
+            Checked_Today_Record_List.extend([Today_Dict["%s" % element], element])
+            Checked_Today_Area_List.append(Today_Dict["%s" % element])
+
+    Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List)
     return Checked_Today_Area_List

@@ -34,16 +34,19 @@ try:
     print()
 
     print("Calculating the Area...")
-    [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
+    [Conventional_Area_List, Today_Coordinates_List, Today_Record_List_When_Latest_Data_is_None] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
     print("Calculation Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
     print()
 
     progress_num=progress_num+1
 
-    print("Labeling...")
-    Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season)
-    print("Labeling Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
-    print()
+    try:
+        print("Labeling...")
+        Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None)
+        print("Labeling Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
+        print()
+    except:
+        def_Labeling_by_Coordinates.Record(Today_Record_List_When_Latest_Data_is_None, Conventional_Area_List, Today_Coordinates_List)
 
     print("Sanding messeges...")
     def_Send_the_message.send_message(RasPi_SerialNum, fname, Checked_Today_Area_List) #本番
@@ -62,3 +65,5 @@ try:
 except:
     if progress_num<1:
         [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
+
+    elif error_message="Couldn't compare"
