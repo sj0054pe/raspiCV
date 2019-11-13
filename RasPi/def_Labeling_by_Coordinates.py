@@ -73,7 +73,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
             exec("print(List_ToCoordinates_YeCoordinates_r_num_%s)" % str(k))
             position_List.append(k)
 
-        for m in range(7):
+        for m in range(0,int(len(Today_Coordinates_List))):
             Checked_Today_Coordinates_List.append("NA")
 
         print('競合している場所の番号について距離の比較を開始します')
@@ -136,7 +136,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
 def make_Header(Season):
     Header=[]
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
-    for i in range(7+1):
+    for i in range(60+1):
         if i == 0:
             Header.append("Date")
         else:
@@ -231,10 +231,9 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
 def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None): #画像上にデータを付与する
     #Date=datetime.date.today()
 
-    #比較するため今日の面積と中心座標をリストと辞書にする。
+    print('比較するため今日の面積と中心座標を辞書にする。')
     Today_Dict={}
-    #for i in range(int(len(Today_Coordinates_List))):
-    for i in range(8):
+    for i in range(int(len(Today_Coordinates_List))):
         Area=Conventional_Area_List[i]
         if re.search("-", Today_Coordinates_List[i]):
             continue
@@ -245,6 +244,7 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
     Checked_Today_Record_List.insert(0,str(theDate))
     Checked_Today_Area_List.insert(0,str(theDate))
 
+    print('直近の座標を取得します。')
     Yesterday_Coordinates_List=pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season)
     Checked_Today_Coordinates_List=Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate)
     if Checked_Today_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
