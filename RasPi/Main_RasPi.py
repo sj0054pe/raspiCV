@@ -8,7 +8,7 @@ import def_Send_the_message
 import def_Save_the_picture
 import def_finish
 
-import PhotoLINE
+import def_PhotoLINE
 
 import time
 TimeMeasurement = time.time()
@@ -70,4 +70,4 @@ except:
     if progress_num<1:
         [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
 
-    PhotoLINE()
+    def_PhotoLINE()
