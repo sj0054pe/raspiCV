@@ -1,4 +1,5 @@
 import subprocess
+from subprocess import run
 
 def take_the_picture(fname): #写真を撮影する
     try:
