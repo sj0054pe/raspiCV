@@ -67,7 +67,6 @@ try:
     print("Everything is fine!!! Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
 
 except:
+    def_PhotoLINE.main()
     if progress_num<1:
         [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
-
-    def_PhotoLINE()
