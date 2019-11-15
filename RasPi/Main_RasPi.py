@@ -63,10 +63,18 @@ try:
     print()
 
     print("finish program...")
-    #def_finish.organize(fname)
+    def_finish.organize(fname)
     print("Everything is fine!!! Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
 
 except:
-    def_PhotoLINE.main()
+    try:
+        def_PhotoLINE.main()
+        progress_num=2
+        def_Save_the_picture.save_the_picture(RasPi_SerialNum, fname) #本番
+    except:
+        if progress_num==2:
+            def_finish.organize(fname)
+            
+        
     if progress_num<1:
         [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
