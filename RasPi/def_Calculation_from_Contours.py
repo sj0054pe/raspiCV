@@ -56,11 +56,16 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     Conventional_Area_List=Calculate_the_Area(contours, theDate, Season) #def
 
     Today_Coordinates_List=[]  #昨日と今日の中心座標を比較する用
+
     for Elements in contours:
-        mu = cv2.moments(Elements)
-        x,y= int(mu["m10"]/mu["m00"]) , int(mu["m01"]/mu["m00"])
-        Coordinates=str(x)+","+str(y)
-        Today_Coordinates_List.append(Coordinates)
+        try:
+            mu = cv2.moments(Elements)
+            x,y= int(mu["m10"]/mu["m00"]) , int(mu["m01"]/mu["m00"])
+            Coordinates=str(x)+","+str(y)
+            print(Coordinates)
+            Today_Coordinates_List.append(Coordinates)
+        except:
+            continue
     #Today_Coordinates_List=Today_Coordinates_List[::-1]
     Today_Coordinates_List.insert(0,str(theDate))
 

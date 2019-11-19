@@ -136,7 +136,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
 def make_Header(Season):
     Header=[]
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
-    for i in range(60+1):
+    for i in range(120+1):
         if i == 0:
             Header.append("Date")
         else:

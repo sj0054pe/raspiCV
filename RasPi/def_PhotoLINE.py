@@ -1,7 +1,6 @@
 #coding:UTF-8
 import datetime
 from time import sleep
-from picamera import PiCamera
 import requests
 import subprocess
 import os
