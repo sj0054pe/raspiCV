@@ -5,26 +5,11 @@ import math
 
 import def_Identifying_RasPi
 
-'''
-def make_Header(Season):
-    Header=[]
-    RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
-    for i in range(120+1):
-        if i == 0:
-            Header.append("Date")
-        else:
-            Header.extend(["Area_%s" % i,"Coordinates_%s" % i])
-    print("Header", Header)
-    with open('Assets/Assets_Output/Newest_Record_%s_on_%s.csv' % (Season,RasPi_SerialNum), 'a') as f: #Mac
-        writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
-        writer.writerow(Header)
-        '''
-
 #csvファイルに保存されている直近の日付のデータを取り出す。
-def pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season):
+def pull_the_latest_Coordinates(theDate, Season, role):
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     try:
-        csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), sep=",")
+        csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum), sep=",")
     except: #観察初日は参照する前日のデータがないので、csvファイルのヘッダーを作るところから始める。
         #make_Header(Season)
         return "No_Data"
@@ -63,7 +48,7 @@ def pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season):
     return Latest_Coordinates_List
 
 def main(): #不完全
-    pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season)
+    pull_the_latest_Coordinates(theDate, Season, role)
 
     return 0
 

@@ -79,23 +79,32 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
     Checked_Today_Area_List.insert(0,str(theDate))
 
     print('直近の座標を取得します。')
-    Yesterday_Coordinates_List=def_Browse_data_on_CSV.pull_the_latest_Coordinates(Today_Coordinates_List, theDate, Season)
+    role="Newest"
+    Yesterday_Coordinates_List=def_Browse_data_on_CSV.pull_the_latest_Coordinates(theDate, Season, role)
     Checked_Today_Coordinates_List=def_Compare_these_Coordinates.Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate)
 
     if Checked_Today_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
         Largest_object=def_Finding_Square.finding_largest_object(Conventional_Area_List)
         def_Finding_Square.Record_the_base_object(Largest_object,Today_Dict,Season,theDate)
+        Base_Area=def_Finding_Square.pull_the_base_Area(theDate, Season, Today_Dict)
+
         Checked_Today_Coordinates_List=[]
         Checked_Today_Coordinates_List.clear()
         Checked_Today_Record_List=Today_Record_List_When_Latest_Data_is_None
+        num=0
         for element in Checked_Today_Record_List:
             if re.search("-", str(element)):
+                num+=1
                 continue
             elif re.search(",", str(element)):
                 Checked_Today_Coordinates_List.append(element)
             else:
-                Checked_Today_Area_List.append(element)
+                Area_cm2=element/Base_Area
+                Checked_Today_Area_List.append(Area_cm2)
+                Checked_Today_Record_List[num]=Area_cm2
                 print(Checked_Today_Area_List)
+            print("+++++++++",num)
+            num+=1
         Checked_Today_Coordinates_List.insert(0,str(theDate))
 
     else: #前日の座標があった場合
@@ -107,8 +116,10 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
                 Checked_Today_Record_List.extend(["NA", "NA"])
                 Checked_Today_Area_List.append("NA")
                 continue
-            Checked_Today_Record_List.extend([Today_Dict["%s" % element], element])
-            Checked_Today_Area_List.append(Today_Dict["%s" % element])
+            Area=Today_Dict["%s" % element]
+            Area_cm2=element/Base_Area
+            Checked_Today_Record_List.extend([Area_cm2, element])
+            Checked_Today_Area_List.append(Area_cm2)
 
     Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List, Season, fname)
     return Checked_Today_Area_List
