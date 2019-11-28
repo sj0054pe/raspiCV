@@ -27,11 +27,6 @@ def Calculate_the_Area(contours,theDate, Season): #輪郭(cnt)から面積を導
     for i, cnt in enumerate(contours):
         # 輪郭の面積を計算する。
         area = cv2.contourArea(cnt)
-        #sub_Area_List=[]
-        #num=(len(contours)-1)-i #新しいラベリング処理方法に合わせてサンプルの上から番号を添付するように変更。
-        #sub_Area_List.append(num)
-        #sub_Area_List.append(area)
-        #Area_List.append(sub_Area_List)
         Area_List.append(area)
         #print("日付：", theDate)
     Area_List.insert(0,str(theDate)) #一番最初に日付を挿入。
@@ -62,9 +57,10 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
             mu = cv2.moments(Elements)
             x,y= int(mu["m10"]/mu["m00"]) , int(mu["m01"]/mu["m00"])
             Coordinates=str(x)+","+str(y)
-            print(Coordinates)
+            #print("try", Coordinates)
             Today_Coordinates_List.append(Coordinates)
         except:
+            #print("except", elements)
             continue
     #Today_Coordinates_List=Today_Coordinates_List[::-1]
     Today_Coordinates_List.insert(0,str(theDate))
@@ -83,8 +79,9 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
             Today_Record_List_When_Latest_Data_is_None.append(Today_Coordinates_List[i])
         except:
             Today_Record_List_When_Latest_Data_is_None.extend(["NA","NA"])
+
     Today_Record_List_When_Latest_Data_is_None.insert(0,str(theDate)) #一番最初に日付を挿入。
-    print("Today_Record_List_When_Latest_Data_is_None", Today_Record_List_When_Latest_Data_is_None)
+    print("Today_Record_List_When_Latest_Data_is_None : ", Today_Record_List_When_Latest_Data_is_None)
 
     #輪郭をプロットする部分。
     frame=cv2.imread('../../%s' % fname) #生画像 #ディレクトリはデスクトップ
@@ -96,10 +93,16 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
     for j, cnt in enumerate(contours):
         cnt = np.squeeze(cnt, axis=1)
         ax.add_patch(Polygon(cnt, color='r', fill=None, lw=0.5))
-        #ax.text(cnt[0][0], cnt[0][1], j, color='orange', size='20')
-    #plt.savefig('../../pre_Contours_on_%s' % fname, bbox_inches='tight') #デスクトップ
     plt.savefig('../../Contours_on_%s' % fname, bbox_inches='tight') #デスクトップ
-    #subprocess.getoutput('convert -trim ../../pre_Contours_on_%s ../../Contours_on_%s' % (fname, fname)) #デスクトップ
-    #os.remove('../../pre_Contours_on_%s' % fname) #デスクトップ
 
     return Conventional_Area_List, Today_Coordinates_List, Today_Record_List_When_Latest_Data_is_None
+
+def main(): #不完全
+    def_Change_the_color.change_the_color(fname)
+    Calculate_the_Area(contours,theDate, Season)
+
+    return 0
+
+if __name__ == '__main__':
+
+    main()
