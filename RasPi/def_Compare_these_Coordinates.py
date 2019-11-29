@@ -3,6 +3,7 @@ import re
 import os
 
 def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate):
+
     if Yesterday_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
         return "No_Data"
     else:
@@ -16,7 +17,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
             exec("List_ToCoordinates_YeCoordinates_r_num_%s=[]" % str(i))
             exec("List_ToCoordinates_YeCoordinates_r_num_%s.clear()" % str(i))
 
-        #print(int(len(Today_Coordinates_List)))
+        #print(Yesterday_Coordinates_List)
         for i in range(1,int(len(Today_Coordinates_List))): #日付もリストに含まれてるから-1する
             print(i)
             #print(Today_Coordinates_List[i])
@@ -25,30 +26,31 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
             #dict_iのiはToday_Coordinates_List[i]のi。
             exec("List_ToCoordinates_YeCoordinates_r_num_%s=[]" % str(i))
             exec("List_ToCoordinates_YeCoordinates_r_num_%s.append(Today_Coordinates_List[%s])" % (str(i),i))
-            for j in range(int(len(Yesterday_Coordinates_List)-1)): #日付もリストに含まれてるから-1する #未確認
-                if re.search("-",Yesterday_Coordinates_List[j]):
+
+            for j in range(1,int(len(Yesterday_Coordinates_List))): #日付もリストに含まれてるから-1する #未確認
+                print(j)
+                print(Yesterday_Coordinates_List[j])
+                if re.search("-",str(Yesterday_Coordinates_List[j])):
+                    continue
+                elif re.search("nan",str(Yesterday_Coordinates_List[j])):
                     continue
                 [Yesterday_X,Yesterday_Y]=str(Yesterday_Coordinates_List[j]).split(",")
                 print("(",Today_X,",",Today_Y,") / (",Yesterday_X,",",Yesterday_Y,")")
-                try:
-                    int(Yesterday_X)
-                    a=int(Today_X)-int(Yesterday_X)
-                    b=int(Today_Y)-int(Yesterday_Y)
-                    r=math.sqrt(a*a+b*b) #距離=√(a^2+b^2)より、最短距離の個体を見つける。
-                    print("距離:", int(r))
-                    if 0< int(r) and int(r) < int(nearest_r):
-                        right_num, nearest_r=j, r
-                        nearest_Yesterday_Coordinates=Yesterday_Coordinates_List[j]
-                        print("変更：",right_num)
-                    elif r==0:
-                        right_num, nearest_r=j, r
-                        nearest_Yesterday_Coordinates=Yesterday_Coordinates_List[j]
-                        print("変更：",right_num)
-                        break
-                    else:
-                        continue
-                except:
-                    continue
+                int(Yesterday_X)
+                a=int(Today_X)-int(Yesterday_X)
+                b=int(Today_Y)-int(Yesterday_Y)
+                r=math.sqrt(a*a+b*b) #距離=√(a^2+b^2)より、最短距離の個体を見つける。
+                print("距離:", int(r))
+                if 0< int(r) and int(r) < int(nearest_r):
+                    right_num, nearest_r=j, r
+                    nearest_Yesterday_Coordinates=Yesterday_Coordinates_List[j]
+                    print("変更：",right_num)
+                elif r==0:
+                    right_num, nearest_r=j, r
+                    nearest_Yesterday_Coordinates=Yesterday_Coordinates_List[j]
+                    print("変更：",right_num)
+                    break
+
             #print(nearest_Yesterday_Coordinates)
             exec("List_ToCoordinates_YeCoordinates_r_num_%s.append(nearest_Yesterday_Coordinates)" % (str(i)))
             exec("List_ToCoordinates_YeCoordinates_r_num_%s.append(nearest_r)" % str(i))
@@ -65,7 +67,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
             exec("print(List_ToCoordinates_YeCoordinates_r_num_%s)" % str(k))
             position_List.append(k)
 
-        for m in range(0,int(len(Today_Coordinates_List))):
+        for m in range(1,int(len(Today_Coordinates_List))):
             Checked_Today_Coordinates_List.append("NA")
 
         print('競合している場所の番号について距離の比較を開始します')

@@ -4,12 +4,11 @@ import csv
 import def_Identifying_RasPi
 import def_Browse_data_on_CSV
 
-def pull_the_base_Area(theDate, Season, Today_Dict):
+def pull_the_base_Coordinates(theDate, Season):
     role="Base"
     Latest_Coordinates_List=def_Browse_data_on_CSV.pull_the_latest_Coordinates(theDate, Season, role)
-    Base_Area=Today_Dict[Latest_Coordinates_List[1]]
-    print(Base_Area)
-    return Base_Area
+
+    return Latest_Coordinates_List
 
 def make_Header(Season):
     Header=[]
