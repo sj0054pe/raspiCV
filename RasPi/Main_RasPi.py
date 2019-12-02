@@ -15,7 +15,8 @@ TimeMeasurement = time.time()
 
 try:
     progress_num=0
-    Season="S8"
+    Season="S9"
+    num_of_object=6+1
 
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     print("RasPi-CPU : ", RasPi_SerialNum)
@@ -44,12 +45,12 @@ try:
 
     try:
         print("Labeling...")
-        Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None)
+        Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object)
         print("Labeling Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
         print()
     except:
         print('error 変更前のデータを記録します。')
-        def_Labeling_by_Coordinates.Record(Today_Record_List_When_Latest_Data_is_None, Conventional_Area_List, Today_Coordinates_List, Season, fname)
+        def_Labeling_by_Coordinates.Record(Today_Record_List_When_Latest_Data_is_None, Conventional_Area_List, Today_Coordinates_List, Season, fname, num_of_object)
         Checked_Today_Area_List=Conventional_Area_List
 
     print("Sanding messeges...")
@@ -74,7 +75,7 @@ except:
     except:
         if progress_num==2:
             def_finish.organize(fname)
-            
-        
+
+
     if progress_num<1:
         [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)

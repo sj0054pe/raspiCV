@@ -1,6 +1,6 @@
 import datetime
 
-def check_the_date(Season):
+def check_the_date(Season, RasPi_SerialNum):
     dates=datetime.datetime.now()
     exept_microsec=dates.strftime("%Y-%m-%d-%H-%M")
     print('[Today : %s]' % str(exept_microsec))

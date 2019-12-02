@@ -9,10 +9,10 @@ import def_Compare_these_Coordinates
 import def_Identifying_RasPi
 import def_Finding_Square
 
-def make_Header(Season):
+def make_Header(Season, num_of_object):
     Header=[]
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
-    for i in range(120+1):
+    for i in range(num_of_object):
         if i == 0:
             Header.append("Date")
         else:
@@ -27,7 +27,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
     try:
         csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), sep=",")
     except: #観察初日は参照する前日のデータがないので、csvファイルのヘッダーを作るところから始める。
-        make_Header(Season)
+        make_Header(Season, num_of_object)
 
     with open("Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
@@ -60,7 +60,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
     cv2.imwrite('../../pre_Area_%s' % fname, frame_with_contours) #デスクトップ
     subprocess.getoutput('convert -trim ../../pre_Area_%s ../../Area_%s' % (fname, fname)) #デスクトップ
 
-def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None): #画像上にデータを付与する
+def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object): #画像上にデータを付与する
 
     print('比較するため今日の面積と中心座標を辞書にする。')
     Today_Dict={}
@@ -125,7 +125,7 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
             Checked_Today_Record_List.extend([Area_cm2, element])
             Checked_Today_Area_List.append(Area_cm2)
 
-    Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List, Season, fname)
+    Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List, Season, fname, num_of_object)
     return Checked_Today_Area_List
 
 def main(): #不完全

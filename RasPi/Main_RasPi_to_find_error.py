@@ -7,14 +7,14 @@ import def_Identifying_RasPi
 import def_Send_the_message
 import def_Save_the_picture
 import def_finish
-
 import def_PhotoLINE
 
 import time
 TimeMeasurement = time.time()
 
 progress_num=0
-Season="S8"
+Season="S9"
+num_of_object=6+1
 
 RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
 print("RasPi-CPU : ", RasPi_SerialNum)
@@ -42,7 +42,7 @@ print()
 progress_num=progress_num+1
 
 print("Labeling...")
-Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None)
+Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object)
 print("Labeling Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
 print()
 
