@@ -2,6 +2,7 @@ import csv
 import pandas as pd
 from datetime import datetime, date, timedelta
 import math
+import re
 
 import def_Identifying_RasPi
 
@@ -28,6 +29,8 @@ def pull_the_latest_Coordinates(theDate, Season, role):
 
     DataFrame_Column_num=1 #DataFrame_Column_num=直近の日付が何行目かを表示。#データフレームは、ヘッダーが行0番目だから、Date_List[0]に入る日付はデータフレームでいうと行1番目になる。リスト⇄データフレーム間の調整。
     for Date in Date_List:
+        if re.match("Date", Date):
+            continue
         Date=datetime.strptime(Date, '%Y-%m-%d')
         new_Difference=theDate-Date
         new_Difference=abs(new_Difference.days)
