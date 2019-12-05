@@ -22,7 +22,7 @@ try:
     print("RasPi-CPU : ", RasPi_SerialNum)
 
     print("Check date...")
-    fname, theDate = def_datetime.check_the_date(Season)
+    fname, theDate = def_datetime.check_the_date(Season, RasPi_SerialNum)
     print("Check date Done!   "+ str(time.time() - TimeMeasurement) + 'sec')
     print()
 
