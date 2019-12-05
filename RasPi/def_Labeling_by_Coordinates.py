@@ -102,6 +102,7 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
                 Checked_Today_Coordinates_List.append(element)
             else:
                 Area_cm2=element/Base_Area
+                Area_cm2=round(Area_cm2, 5)
                 Checked_Today_Area_List.append(Area_cm2)
                 Checked_Today_Record_List[num]=Area_cm2
                 print(Checked_Today_Area_List)
@@ -122,6 +123,7 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
                 continue
             Area=Today_Dict[element]
             Area_cm2=Area/Base_Area
+            Area_cm2=round(Area_cm2, 5)
             Checked_Today_Record_List.extend([Area_cm2, element])
             Checked_Today_Area_List.append(Area_cm2)
 
