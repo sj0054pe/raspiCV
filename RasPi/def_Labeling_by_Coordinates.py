@@ -22,7 +22,7 @@ def make_Header(Season, num_of_object):
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
         writer.writerow(Header)
 
-def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List,Season,fname):
+def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List,Season,fname,num_of_object):
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     try:
         csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), sep=",")
