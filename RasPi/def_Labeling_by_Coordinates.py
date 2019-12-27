@@ -9,10 +9,10 @@ import def_Compare_these_Coordinates
 import def_Identifying_RasPi
 import def_Finding_Square
 
-def make_Header(Season, num_of_object):
+def make_Header(Season, num_of_object,RasPi_SerialNum):
     Header=[]
-    RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
-    for i in range(num_of_object):
+    #RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
+    for i in range(num_of_object+1):
         if i == 0:
             Header.append("Date")
         else:
@@ -22,12 +22,12 @@ def make_Header(Season, num_of_object):
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
         writer.writerow(Header)
 
-def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List,Season,fname,num_of_object):
-    RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
+def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List,Season,fname,num_of_object,RasPi_SerialNum):
+    #RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     try:
-        csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), sep=",")
+        csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), sep=",", engine="python")
     except: #観察初日は参照する前日のデータがないので、csvファイルのヘッダーを作るところから始める。
-        make_Header(Season, num_of_object)
+        make_Header(Season, num_of_object,RasPi_SerialNum)
 
     with open("Assets/Assets_Output/Newest_Record_%s_on_%s.csv" % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
@@ -60,7 +60,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
     cv2.imwrite('../../pre_Area_%s' % fname, frame_with_contours) #デスクトップ
     subprocess.getoutput('convert -trim ../../pre_Area_%s ../../Area_%s' % (fname, fname)) #デスクトップ
 
-def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object): #画像上にデータを付与する
+def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object,RasPi_SerialNum): #画像上にデータを付与する
 
     print('比較するため今日の面積と中心座標を辞書にする。')
     Today_Dict={}
@@ -72,21 +72,28 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
         else:
             Area=Conventional_Area_List[i]
             Today_Dict["%s" % Today_Coordinates_List[i]]=Area #面積と座標を結びつける
+    print('Today_Dict : ', Today_Dict)
 
     Checked_Today_Record_List=[]
     Checked_Today_Area_List=[]
     Checked_Today_Record_List.insert(0,str(theDate))
     Checked_Today_Area_List.insert(0,str(theDate))
+    Checked_Today_Coordinates_List=[]
 
     print('直近の座標を取得します。')
     role="Newest"
-    Yesterday_Coordinates_List=def_Browse_data_on_CSV.pull_the_latest_Coordinates(theDate, Season, role)
-    Checked_Today_Coordinates_List=def_Compare_these_Coordinates.Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate)
-
+    Yesterday_Coordinates_List=def_Browse_data_on_CSV.pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum)
+    print('Browsing Done!')
+    Checked_Today_Coordinates_List=def_Compare_these_Coordinates.Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate,RasPi_SerialNum)
+    print('Compareing Done!')
     if Checked_Today_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
-        Largest_object=def_Finding_Square.finding_largest_object(Conventional_Area_List)
-        def_Finding_Square.Record_the_base_object(Largest_object,Today_Dict,Season,theDate)
-        Base_Coordinates_List=def_Finding_Square.pull_the_base_Coordinates(theDate, Season)
+        print('1')
+        Largest_object=def_Finding_Square.finding_largest_object(Conventional_Area_List,RasPi_SerialNum)
+        print('2')
+        def_Finding_Square.Record_the_base_object(Largest_object,Today_Dict,Season,theDate,RasPi_SerialNum)
+        print('3')
+        Base_Coordinates_List=def_Finding_Square.pull_the_base_Coordinates(theDate, Season,RasPi_SerialNum)
+        print('1')
         Base_Coordinates=Base_Coordinates_List[1]
         Base_Area=Today_Dict[Base_Coordinates]
 
@@ -110,8 +117,8 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
         Checked_Today_Coordinates_List.insert(0,str(theDate))
 
     else: #前日の座標があった場合
-        Base_Coordinates_List=def_Finding_Square.pull_the_base_Coordinates(theDate, Season)
-        Checked_Base_Coordinates_List=def_Compare_these_Coordinates.Compare_these_Coordinates(Today_Coordinates_List, Base_Coordinates_List, theDate)
+        Base_Coordinates_List=def_Finding_Square.pull_the_base_Coordinates(theDate, Season, RasPi_SerialNum)
+        Checked_Base_Coordinates_List=def_Compare_these_Coordinates.Compare_these_Coordinates(Today_Coordinates_List, Base_Coordinates_List, theDate,RasPi_SerialNum)
         Checked_Base_Coordinates=Checked_Base_Coordinates_List[1]
         Base_Area=Today_Dict[Checked_Base_Coordinates]
         for element in Checked_Today_Coordinates_List: #element=座標
@@ -127,11 +134,11 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
             Checked_Today_Record_List.extend([Area_cm2, element])
             Checked_Today_Area_List.append(Area_cm2)
 
-    Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List, Season, fname, num_of_object)
+    Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coordinates_List, Season, fname, num_of_object,RasPi_SerialNum)
     return Checked_Today_Area_List
 
 def main(): #不完全
-    Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None)
+    Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None,RasPi_SerialNum)
 
     return 0
 

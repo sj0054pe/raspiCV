@@ -2,9 +2,10 @@ import math
 import re
 import os
 
-def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate):
+def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate,RasPi_SerialNum):
 
     if Yesterday_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
+        print('昨日の記録に関してNo_Dataを確認。')
         return "No_Data"
     else:
         print("昨日の座標 　　　 : ", Yesterday_Coordinates_List)

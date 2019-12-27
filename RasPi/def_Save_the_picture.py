@@ -26,13 +26,13 @@ def save_the_picture(RasPi_SerialNum, fname): #画像をクラウド(Dropbox)に
     elif RasPi_SerialNum=='cebabe86':#4
         API_unFilter='pnEJapb3mPAAAAAAAAAA6E9YgxmxuV1ZzWQICaXVBltXi3fZmWAr5M4J55PzAN14'
         API_Area='pnEJapb3mPAAAAAAAAAA6Wlsbr1NETPSM2Y0OlfYS9qlRgYsRbWeZaiT8Nv4Cq3e'
-    elif RasPi_SerialNum=='712d5dde':#2
+    elif RasPi_SerialNum=='712d5dde':#2→1
         API_unFilter='pnEJapb3mPAAAAAAAAAA6nNd0IwQnYBhLuW7GQNXV1cBEHmk8mjQHyxIIsdkXgum'
         API_Area='pnEJapb3mPAAAAAAAAAA63NDuOtdWn_7tYDg7GKbDI_l7nDqJipaJXokJSLZuwZ2'
-    elif RasPi_SerialNum=='b6abc89e': #3
+    elif RasPi_SerialNum=='b6abc89e': #3→2
         API_unFilter='pnEJapb3mPAAAAAAAAAA7s6P0bPCTA9P81ZZP7R52ThXAkxDRqzgYqxtLQ-GM-wk'
         API_Area='pnEJapb3mPAAAAAAAAAA7X8YFACiPL1uNJJF5uTKZS2H32OLjIuCsbwln_xzkTS0'
-    elif RasPi_SerialNum=='b4abbd7a': #1
+    elif RasPi_SerialNum=='b4abbd7a': #1→3
         API_unFilter='pnEJapb3mPAAAAAAAAAA74vXf_Nj6crHubBynPX_ZSwB_WMpghR8gye2n6zWRmTa'
         API_Area='pnEJapb3mPAAAAAAAAAA8KPLYjE4QVoqfdbG4xV8Ijre0Jwxxd94PLXkZQeYJe5I'
     elif RasPi_SerialNum=='c310a350': #7

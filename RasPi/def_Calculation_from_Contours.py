@@ -8,10 +8,10 @@ from matplotlib.patches import Circle, Polygon, Rectangle
 from scipy import ndimage
 import subprocess
 
-import def_Identifying_RasPi
+#import def_Identifying_RasPi
 
-def Record_Area(Area_List, Season): #とりあえず従来の方法で面積データを保存する
-    RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
+def Record_Area(Area_List, Season,RasPi_SerialNum): #とりあえず従来の方法で面積データを保存する
+    #RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     csv_List=[]
     for Elements in Area_List:
         Contours_Area=Elements
@@ -20,7 +20,7 @@ def Record_Area(Area_List, Season): #とりあえず従来の方法で面積デ�
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
         writer.writerow(csv_List)
 
-def Calculate_the_Area(contours,theDate, Season): #輪郭(cnt)から面積を導出する
+def Calculate_the_Area(contours,theDate, Season,RasPi_SerialNum): #輪郭(cnt)から面積を導出する
     #Date=datetime.date.today()
     Area_List = []
     #面積を求める
@@ -32,11 +32,11 @@ def Calculate_the_Area(contours,theDate, Season): #輪郭(cnt)から面積を導
     Area_List.insert(0,str(theDate)) #一番最初に日付を挿入。
     print("-",len(contours), "個検出しました。-")
     #print("面積(輪郭)：", Conventional_Area_List)
-    Record_Area(Area_List, Season)
+    Record_Area(Area_List, Season, RasPi_SerialNum)
 
     return Area_List
 
-def draw_the_contours(fname, theDate, Season): #輪郭を描写する
+def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写する
     #↓画像を読み込む。
     img = cv2.imread('../../Green.png') #デスクトップ
     #↓面積導出関数へ渡す。
@@ -48,10 +48,12 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
         _,contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
     Conventional_Area_List = []
-    Conventional_Area_List=Calculate_the_Area(contours, theDate, Season) #def
+    Conventional_Area_List=Calculate_the_Area(contours, theDate, Season,RasPi_SerialNum) #def
 
     Today_Coordinates_List=[]  #昨日と今日の中心座標を比較する用
-
+    i=0
+    Error_Coordinates_List=[]
+    Error_Coordinates_List.clear()
     for Elements in contours:
         try:
             mu = cv2.moments(Elements)
@@ -59,13 +61,22 @@ def draw_the_contours(fname, theDate, Season): #輪郭を描写する
             Coordinates=str(x)+","+str(y)
             #print("try", Coordinates)
             Today_Coordinates_List.append(Coordinates)
+            i+=1
         except:
             #print("except", elements)
+            i+=1
+            Error_Coordinates_List.append(int(i))
             continue
+
+    print(Error_Coordinates_List)
+
+    dellist = lambda items, indexes: [item for index, item in enumerate(items) if index not in indexes] #https://qiita.com/nagataaaas/items/531b1fc5ce42a791c7df
+    Conventional_Area_List=dellist(Conventional_Area_List, Error_Coordinates_List)
+    #print(Conventional_Area_List)
     #Today_Coordinates_List=Today_Coordinates_List[::-1]
     Today_Coordinates_List.insert(0,str(theDate))
 
-    print("Today_Area_List : ", Conventional_Area_List)
+    print("Conventional_Area_List : ", Conventional_Area_List)
     print("Today_Coordinates_List : ", Today_Coordinates_List)
 
     #比較するため今日の面積と中心座標をリストと辞書にする。
