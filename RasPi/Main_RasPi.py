@@ -71,9 +71,9 @@ try:
 
 except:
     try:
-        def_PhotoLINE.main()
-        progress_num=2
         def_Save_the_picture.save_the_picture(RasPi_SerialNum, fname) #本番
+        progress_num=2
+        def_PhotoLINE.main()
     except:
         if progress_num==2:
             def_finish.organize(fname)

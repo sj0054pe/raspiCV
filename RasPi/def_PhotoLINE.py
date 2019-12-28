@@ -41,7 +41,7 @@ def send_message():
     payload = {"message" :  message}
     files = {"imageFile": open("/home/pi/Desktop/%s" % fname, "rb")} #バイナリで画像ファイルを開きます。対応している形式はPNG/JPEGです。
     r = requests.post(url ,headers = headers ,params=payload, files=files)
-    #os.remove("/home/pi/Desktop/%s" % fname)
+    os.remove("/home/pi/Desktop/%s" % fname)
 
 def main():
     check_the_date()
