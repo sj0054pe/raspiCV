@@ -1,5 +1,5 @@
 import def_datetime
-import def_Take_the_picture
+import def_Take_a_file
 import def_Change_the_color
 import def_Calculation_from_Contours
 import def_Labeling_by_Coordinates
@@ -7,14 +7,11 @@ import def_Identifying_RasPi
 import def_Send_the_message
 import def_Save_the_picture
 import def_finish
+
 import def_PhotoLINE
 
 import time
 TimeMeasurement = time.time()
-
-progress_num=0
-Season="S9"
-num_of_object=6+1
 
 progress_num=0
 Season="S10"
