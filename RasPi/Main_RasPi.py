@@ -1,5 +1,5 @@
 import def_datetime
-import def_Take_the_picture
+import def_Take_a_file
 import def_Change_the_color
 import def_Calculation_from_Contours
 import def_Labeling_by_Coordinates
@@ -15,11 +15,13 @@ TimeMeasurement = time.time()
 
 try:
     progress_num=0
-    Season="S9"
+    Season="S10"
     num_of_object=6+1
 
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     print("RasPi-CPU : ", RasPi_SerialNum)
+    print("Idenitfying RasPi-CPU Done!   "+ str(time.time() - TimeMeasurement) + 'sec')
+    print()
 
     print("Check date...")
     fname, theDate = def_datetime.check_the_date(Season, RasPi_SerialNum)
@@ -27,7 +29,7 @@ try:
     print()
 
     print("Taking Picture... ")
-    fname = def_Take_the_picture.take_the_picture(fname)
+    fname = def_Take_a_picture.take_the_picture(fname)
     print("Take Picture Done!   "+ str(time.time() - TimeMeasurement) + 'sec')
     print()
 
@@ -37,7 +39,7 @@ try:
     print()
 
     print("Calculating the Area...")
-    [Conventional_Area_List, Today_Coordinates_List, Today_Record_List_When_Latest_Data_is_None] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
+    [Conventional_Area_List, Today_Coordinates_List, Today_Record_List_When_Latest_Data_is_None] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season,RasPi_SerialNum)
     print("Calculation Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
     print()
 
@@ -45,12 +47,12 @@ try:
 
     try:
         print("Labeling...")
-        Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object)
+        Checked_Today_Area_List = def_Labeling_by_Coordinates.Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object,RasPi_SerialNum)
         print("Labeling Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
         print()
     except:
         print('error 変更前のデータを記録します。')
-        def_Labeling_by_Coordinates.Record(Today_Record_List_When_Latest_Data_is_None, Conventional_Area_List, Today_Coordinates_List, Season, fname, num_of_object)
+        def_Labeling_by_Coordinates.Record(Today_Record_List_When_Latest_Data_is_None, Conventional_Area_List, Today_Coordinates_List, Season, fname, num_of_object,RasPi_SerialNum)
         Checked_Today_Area_List=Conventional_Area_List
 
     print("Sanding messeges...")
@@ -64,7 +66,7 @@ try:
     print()
 
     print("finish program...")
-    def_finish.organize(fname)
+    def_finish.organize_on_RasPi(fname)
     print("Everything is fine!!! Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
 
 except:
@@ -75,7 +77,6 @@ except:
     except:
         if progress_num==2:
             def_finish.organize(fname)
-
 
     if progress_num<1:
         [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)

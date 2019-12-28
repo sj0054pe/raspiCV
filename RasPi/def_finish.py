@@ -1,13 +1,14 @@
 import os
+import shutil
 
-def organize_on_Mac(fname):
+def organize_on_Mac(fname, Season, RasPi_SerialNum):
     if not os.path.isdir("Assets/Assets_Output/%s" % Season):
-        os.mkdir("Assets/Assets_Output/%s/%s" % Season)
+        os.mkdir("Assets/Assets_Output/%s" % Season)
     if not os.path.isdir("Assets/Assets_Output/%s/%s" % (Season, RasPi_SerialNum)):
         os.mkdir("Assets/Assets_Output/%s/%s" % (Season, RasPi_SerialNum))
 
-    os.move("../../%s Assets/Assets_Output/%s/%s/%s" % (fname, Season, RasPi_SerialNum, fname))
-    os.move('../../%s Assets/Assets_Output/%s/%s/Area_%s' % (fname, Season, RasPi_SerialNum, fname))
+    shutil.move("../../%s" % fname, "Assets/Assets_Output/%s/%s/%s" % (Season, RasPi_SerialNum, fname))
+    shutil.move("../../Area_%s" % fname, "Assets/Assets_Output/%s/%s/Area_%s" % (Season, RasPi_SerialNum, fname))
 
     #os.remove('../../%s' % fname)
     os.remove('../../Green.png')
