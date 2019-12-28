@@ -67,7 +67,7 @@ def main(theDate, RasPi_SerialNum):
         print()
 
         print("finish program...")
-        def_finish.organize_on_Mac(fname)
+        def_finish.organize_on_Mac(fname, Season, RasPi_SerialNum)
         print("Everything is fine!!! Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
 
     except:

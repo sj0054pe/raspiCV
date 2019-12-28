@@ -57,5 +57,5 @@ print("Saved Pictures!   "+ str(time.time() - TimeMeasurement) + 'sec')
 print()
 
 print("finish program...")
-#def_finish.organize(fname)
+#def_finish.organize_on_RasPi(fname)
 print("Everything is fine!!! Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
