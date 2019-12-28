@@ -29,7 +29,7 @@ try:
     print()
 
     print("Taking Picture... ")
-    fname = def_Take_a_picture.take_the_picture(fname)
+    fname = def_Take_a_file.take_the_picture(fname)
     print("Take Picture Done!   "+ str(time.time() - TimeMeasurement) + 'sec')
     print()
 
