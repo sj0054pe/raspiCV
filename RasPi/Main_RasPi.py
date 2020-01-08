@@ -88,7 +88,7 @@ except:
         def_Send_the_message.send_message(RasPi_SerialNum, fname, Checked_Today_Area_List)
     except:
         if progress_num==2:
-            def_finish.organize(fname)
+            def_finish.organize_on_RasPi(fname)
 
     if progress_num<1:
         [Conventional_Area_List, Today_Coordinates_List] = def_Calculation_from_Contours.draw_the_contours(fname, theDate, Season)
