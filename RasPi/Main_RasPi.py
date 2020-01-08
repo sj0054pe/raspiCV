@@ -14,7 +14,7 @@ import def_finish
 import def_PhotoLINE
 
 import os
-os.chdir('/home/pi/Desktop')
+os.chdir('/home/pi/Desktop/raspiCV/RasPi')
 
 try:
     #初期設定
