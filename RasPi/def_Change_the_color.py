@@ -1,9 +1,7 @@
-#import cv2
-#import numpy as np
+import cv2
+import numpy as np
 
 def change_the_color(fname): #カラー画像を緑&黒の画像にする
-    import cv2
-    import numpy as np
     print("ファイル名：", fname)
     frame=cv2.imread('~/Desktop/%s' % fname)
     # フレームをHSVに変換
