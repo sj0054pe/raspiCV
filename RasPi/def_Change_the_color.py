@@ -1,9 +1,11 @@
-import cv2
-import numpy as np
+#import cv2
+#import numpy as np
 
 def change_the_color(fname): #カラー画像を緑&黒の画像にする
+    import cv2
+    import numpy as np
     print("ファイル名：", fname)
-    frame=cv2.imread('../../%s' % fname)
+    frame=cv2.imread('~/Desktop/%s' % fname)
     # フレームをHSVに変換
     hsv=cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # 取得する色の範囲を指定する
@@ -14,4 +16,4 @@ def change_the_color(fname): #カラー画像を緑&黒の画像にする
     # フレーム画像とマスク画像の共通の領域を抽出する。
     img_color=cv2.bitwise_and(frame, frame, mask=img_mask)
     #下の関数へ受け渡すためにデスクトップに一時保存(後でremoveで消します。)
-    cv2.imwrite('../../Green.png', img_color) #Green.pngは黒色背景にジェンマの画像があります。
+    cv2.imwrite('~/Desktop/Green.png', img_color) #Green.pngは黒色背景にジェンマの画像があります。
