@@ -1,3 +1,5 @@
+export PATH=$PATH:/usr/local/bin
+
 import time
 TimeMeasurement = time.time()
 
