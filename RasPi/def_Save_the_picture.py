@@ -44,11 +44,11 @@ def save_the_picture(RasPi_SerialNum, fname): #画像をクラウド(Dropbox)に
     else:
         return
 
-    try:
-        Upload_on_Dropbox(API_unFilter, fname, RasPi_SerialNum) #Dropbox内に保存 ノーマルな写真
-    except:
-        print('すでに%sはDropbox上に保存してあります。' % fname)
-    try:
-        Upload_on_Dropbox(API_Area, 'Area_%s' % fname, RasPi_SerialNum) #輪郭を記述した写真
-    except:
-        print('すでにArea_%sはDropbox上に保存してあります。' % fname)
+    #try:
+    Upload_on_Dropbox(API_unFilter, fname, RasPi_SerialNum) #Dropbox内に保存 ノーマルな写真
+    #except:
+        #print('すでに%sはDropbox上に保存してあります。' % fname)
+    #try:
+    Upload_on_Dropbox(API_Area, 'Area_%s' % fname, RasPi_SerialNum) #輪郭を記述した写真
+    #except:
+        #print('すでにArea_%sはDropbox上に保存してあります。' % fname)
