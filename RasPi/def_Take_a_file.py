@@ -7,7 +7,7 @@ def make_the_filename(theDate, Season, RasPi_SerialNum): #ファイル名を撮�
 
 def take_the_picture(fname): #写真を撮影する
     try:
-        subprocess.getoutput('raspistill -w 400 -h 500 -n -o ~/Desktop/%s' % fname) #ラズパイカメラで撮影した画像はデストップに一時保存(後でos.removeで削除する。) #RaspberryPi
+        subprocess.getoutput('raspistill -w 400 -h 500 -n -o ../../%s' % fname) #ラズパイカメラで撮影した画像はデストップに一時保存(後でos.removeで削除する。) #RaspberryPi
         print('[撮影成功]')
         print(fname,"を利用します。")
         return fname

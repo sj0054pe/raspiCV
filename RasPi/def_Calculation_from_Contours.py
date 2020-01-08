@@ -64,7 +64,7 @@ def Coordinates(contours, theDate, Season,RasPi_SerialNum, Conventional_Area_Lis
 
 def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写する
     #↓画像を読み込む。
-    img = cv2.imread('~/Desktop/Green.png') #デスクトップ
+    img = cv2.imread('../../Green.png') #デスクトップ
     #↓面積導出関数へ渡す。
     gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #緑色を白、背景を黒にした二値化をする。(そうしないと輪郭抽出や他のOpenCVの関数で扱いずらい。)
 
@@ -108,7 +108,7 @@ def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写
     for j, cnt in enumerate(contours):
         cnt = np.squeeze(cnt, axis=1)
         ax.add_patch(Polygon(cnt, color='r', fill=None, lw=0.5))
-    plt.savefig('~/Desktop/Contours_on_%s' % fname, bbox_inches='tight') #デスクトップ
+    plt.savefig('../../Contours_on_%s' % fname, bbox_inches='tight') #デスクトップ
 
     return Conventional_Area_List, Today_Coordinates_List, Today_Record_List_When_Latest_Data_is_None
 
