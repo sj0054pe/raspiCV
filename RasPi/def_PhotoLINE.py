@@ -13,7 +13,7 @@ def check_the_date():
     return fname
 
 def take_the_picture(fname):
-    subprocess.getoutput('raspistill -w 400 -h 500 -n -o ~/Desktop/%s' % fname)
+    subprocess.getoutput('raspistill -w 400 -h 500 -n -o ../../%s' % fname)
 
 def get_Serial():# Extract serial from cpuinfo file
     cpuserial = "0000000000000000"
@@ -36,7 +36,7 @@ def send_message(fname):
     RasPi_Number='[picamera_%s]' % RasPi_SerialNumber
     message =  RasPi_Number+ fname + '\n' + 'ラボ_ゼニゴケ観察'
     payload = {"message" :  message}
-    files = {"imageFile": open("~/Desktop/%s" % fname, "rb")} #バイナリで画像ファイルを開きます。対応している形式はPNG/JPEGです。
+    files = {"imageFile": open("../../%s" % fname, "rb")} #バイナリで画像ファイルを開きます。対応している形式はPNG/JPEGです。
     r = requests.post(url ,headers = headers ,params=payload, files=files)
     os.remove("/home/pi/Desktop/%s" % fname)
 
