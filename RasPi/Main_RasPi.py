@@ -13,6 +13,9 @@ import def_finish
 
 import def_PhotoLINE
 
+import os
+os.chdir('/home/pi/Desktop')
+
 try:
     #初期設定
     progress_num=0 #プログラムの進行度を測る番号(main関数内のexcept時に使う。)
