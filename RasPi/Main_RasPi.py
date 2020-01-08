@@ -1,8 +1,6 @@
 import time
 TimeMeasurement = time.time()
 
-import cv2
-
 import def_datetime
 import def_Take_a_file
 import def_Change_the_color
