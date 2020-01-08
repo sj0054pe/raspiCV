@@ -80,14 +80,14 @@ def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写
     Today_Coordinates_List=[]  #昨日と今日の中心座標を比較する用
     Today_Coordinates_List, Conventional_Area_List=Coordinates(contours, theDate, Season,RasPi_SerialNum, Conventional_Area_List, Today_Coordinates_List)
 
-    print("Conventional_Area_List : ", Conventional_Area_List)
-    print("Today_Coordinates_List : ", Today_Coordinates_List)
+    #print("Conventional_Area_List : ", Conventional_Area_List)
+    #print("Today_Coordinates_List : ", Today_Coordinates_List)
 
     #比較するため今日の面積と中心座標をリストと辞書にする。
     Today_Record_List_When_Latest_Data_is_None=[] #前日の比較する座標がなかった時にcsvファイルに保存する用
     for i in range(1,int(len(Today_Coordinates_List))):
-        print(Today_Coordinates_List[i])
-        print(Conventional_Area_List[i])
+        #print(Today_Coordinates_List[i])
+        #print(Conventional_Area_List[i])
         try:
             Area=Conventional_Area_List[i]
             Today_Record_List_When_Latest_Data_is_None.append(Area)
