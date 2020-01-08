@@ -10,8 +10,8 @@ import subprocess
 
 #import def_Identifying_RasPi
 
+#開発初期の保存方法も念のため採用している。#個体番号を並べ替えず、かつ面積だけを保存する
 def Record_Area(Area_List, Season,RasPi_SerialNum): #とりあえず従来の方法で面積データを保存する
-    #RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     csv_List=[]
     for Elements in Area_List:
         Contours_Area=Elements
@@ -36,21 +36,7 @@ def Calculate_the_Area(contours,theDate, Season,RasPi_SerialNum): #輪郭(cnt)�
 
     return Area_List
 
-def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写する
-    #↓画像を読み込む。
-    img = cv2.imread('../../Green.png') #デスクトップ
-    #↓面積導出関数へ渡す。
-    gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #緑色を白、背景を黒にした二値化をする。(そうしないと輪郭抽出や他のOpenCVの関数で扱いずらい。)
-
-    try:
-        contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-    except:
-        _,contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-
-    Conventional_Area_List = []
-    Conventional_Area_List=Calculate_the_Area(contours, theDate, Season,RasPi_SerialNum) #def
-
-    Today_Coordinates_List=[]  #昨日と今日の中心座標を比較する用
+def Coordinates(contours, theDate, Season,RasPi_SerialNum, Conventional_Area_List, Today_Coordinates_List):
     i=0
     Error_Coordinates_List=[]
     Error_Coordinates_List.clear()
@@ -62,19 +48,37 @@ def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写
             #print("try", Coordinates)
             Today_Coordinates_List.append(Coordinates)
             i+=1
+            #print(i)
         except:
-            #print("except", elements)
             i+=1
             Error_Coordinates_List.append(int(i))
+            #print("Error", int(i))
             continue
-
-    print(Error_Coordinates_List)
 
     dellist = lambda items, indexes: [item for index, item in enumerate(items) if index not in indexes] #https://qiita.com/nagataaaas/items/531b1fc5ce42a791c7df
     Conventional_Area_List=dellist(Conventional_Area_List, Error_Coordinates_List)
-    #print(Conventional_Area_List)
-    #Today_Coordinates_List=Today_Coordinates_List[::-1]
+    #print("Conventional_Area_List",Conventional_Area_List)
     Today_Coordinates_List.insert(0,str(theDate))
+
+    return Today_Coordinates_List, Conventional_Area_List
+
+def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写する
+    #↓画像を読み込む。
+    img = cv2.imread('../../Green.png') #デスクトップ
+    #↓面積導出関数へ渡す。
+    gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #緑色を白、背景を黒にした二値化をする。(そうしないと輪郭抽出や他のOpenCVの関数で扱いずらい。)
+
+    #OpenCV3.0と4.0で使用が違うにで場合分け
+    try:
+        contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    except:
+        _,contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+
+    Conventional_Area_List = []
+    Conventional_Area_List=Calculate_the_Area(contours, theDate, Season,RasPi_SerialNum) #def
+
+    Today_Coordinates_List=[]  #昨日と今日の中心座標を比較する用
+    Today_Coordinates_List, Conventional_Area_List=Coordinates(contours, theDate, Season,RasPi_SerialNum, Conventional_Area_List, Today_Coordinates_List)
 
     print("Conventional_Area_List : ", Conventional_Area_List)
     print("Today_Coordinates_List : ", Today_Coordinates_List)
