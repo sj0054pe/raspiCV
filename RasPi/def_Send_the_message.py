@@ -8,10 +8,12 @@ def send_message(RasPi_SerialNumber, fname, Checked_Today_Area_List): #LINEのAP
     Picname_LINE="Area_" + fname
     Area_7=''
     j=0
-    print("making message...")
-    for i in Checked_Today_Area_List:
-        Area_7=Area_7+str(j)+'_'+str(i)+'\n'
-        j+=1
+    try:
+        for i in Checked_Today_Area_List:
+            Area_7=Area_7+str(j)+'_'+str(i)+'\n'
+            j+=1
+    except:
+        Area_7=Checked_Today_Area_List
     message =  RasPi_Number+ '\n'+ Picname_LINE + '\n' + '面積の記録成功です。\n'+Area_7
     payload = {"message" :  message}
     files = {"imageFile": open("../../%s" % Picname_LINE, "rb")} #バイナリで画像ファイルを開きます。対応している形式はPNG/JPEGです。

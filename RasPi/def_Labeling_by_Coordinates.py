@@ -87,13 +87,9 @@ def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Sea
     Checked_Today_Coordinates_List=def_Compare_these_Coordinates.Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List, theDate,RasPi_SerialNum)
     print('Compareing Done!')
     if Checked_Today_Coordinates_List=="No_Data": #観察初日に参照する前日のデータがあるorないで条件分岐。
-        print('1')
         Largest_object=def_Finding_Square.finding_largest_object(Conventional_Area_List,RasPi_SerialNum)
-        print('2')
         def_Finding_Square.Record_the_base_object(Largest_object,Today_Dict,Season,theDate,RasPi_SerialNum)
-        print('3')
         Base_Coordinates_List=def_Finding_Square.pull_the_base_Coordinates(theDate, Season,RasPi_SerialNum)
-        print('1')
         Base_Coordinates=Base_Coordinates_List[1]
         Base_Area=Today_Dict[Base_Coordinates]
 

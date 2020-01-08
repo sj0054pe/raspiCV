@@ -10,8 +10,6 @@ import def_Identifying_RasPi
 #csvファイルに保存されている直近の日付のデータを取り出す。
 def pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum):
     #RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
-    print('AAAAAAAAAAAAAAAA')
-
     try:
         print(theDate, Season, role, RasPi_SerialNum)
         print("Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum))
@@ -21,17 +19,6 @@ def pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum):
         #make_Header(Season)
         print("%s_Record_%s_on_%s.csvは存在しません。" % (role,Season,RasPi_SerialNum))
         return "No_Data"
-
-    '''
-    if os.path.isdir("Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum)):
-        print('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
-    if not os.path.isdir("Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum)):
-        print("%s_Record_%s_on_%s.csvは存在しません。" % (role,Season,RasPi_SerialNum))
-        return "No_Data"
-    print("%s_Record_%s_on_%s.csvを発見" % (role,Season,RasPi_SerialNum))
-    csv_input=0
-    csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum), sep=",")
-    '''
     #print(list(csv_input["Date"])) #csvファイルに保存されている日付の一覧を表示
     Date_List=list(csv_input["Date"])
     print(csv_input)
@@ -40,11 +27,11 @@ def pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum):
 
     YESTERDAY=datetime.strptime(YESTERDAY, '%Y-%m-%d')
     theDate=datetime.strptime(theDate, '%Y-%m-%d')
-    print(YESTERDAY)
+    #print(YESTERDAY)
 
     Difference=theDate-YESTERDAY
     Difference=abs(Difference.days)
-    print(Difference)
+    #print(Difference)
 
     DataFrame_Column_num=1 #DataFrame_Column_num=直近の日付が何行目かを表示。#データフレームは、ヘッダーが行0番目だから、Date_List[0]に入る日付はデータフレームでいうと行1番目になる。リスト⇄データフレーム間の調整。
     for Date in Date_List:
