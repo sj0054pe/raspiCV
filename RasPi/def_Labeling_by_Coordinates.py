@@ -39,7 +39,7 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
 
     print("-----結果------")
     print(range(int(len(Checked_Today_Area_List))))
-    frame_with_contours=cv2.imread('../../Contours_on_%s' % fname) #デスクトップ
+    frame_with_contours=cv2.imread('~/Desktop/Contours_on_%s' % fname) #デスクトップ
     for i in range(int(len(Checked_Today_Area_List))):
         print(i)
         if re.search("-", str(Checked_Today_Area_List[i])):
@@ -57,8 +57,8 @@ def Record(Checked_Today_Record_List, Checked_Today_Area_List, Checked_Today_Coo
         cv2.putText(frame_with_contours, "C:(" + str(Checked_Today_Coordinates_List[i]) + ")", (int(x), int(y)+40), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 255, 255)) # 各オブジェクトの重心座標をに黄文字で表示
 
     # 画像の保存
-    cv2.imwrite('../../pre_Area_%s' % fname, frame_with_contours) #デスクトップ
-    subprocess.getoutput('convert -trim ../../pre_Area_%s ../../Area_%s' % (fname, fname)) #デスクトップ
+    cv2.imwrite('~/Desktop/pre_Area_%s' % fname, frame_with_contours) #デスクトップ
+    subprocess.getoutput('convert -trim ~/Desktop/pre_Area_%s ~/Desktop/Area_%s' % (fname, fname)) #デスクトップ
 
 def Labeling(fname, Conventional_Area_List, Today_Coordinates_List, theDate, Season, Today_Record_List_When_Latest_Data_is_None, num_of_object,RasPi_SerialNum): #画像上にデータを付与する
 
