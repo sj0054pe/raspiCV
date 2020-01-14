@@ -14,13 +14,16 @@ import def_finish
 import def_PhotoLINE
 
 import os
-os.chdir('/home/pi/Desktop/raspiCV/RasPi')
+try:
+    os.chdir('/home/pi/Desktop/raspiCV/RasPi')
+except:
+    print("ラズパイではありません。")
 
 try:
     #初期設定
     progress_num=0 #プログラムの進行度を測る番号(main関数内のexcept時に使う。)
     Season="S10" #シーズンごとに変更する。(いろんなモジュールに存在するSeasonはここから派生しているのでこの部分の変更をするだけでいい。)
-    num_of_object=6+1 #個体数 6はゼニゴケの数、1はスケール
+    num_of_object=8+1 #個体数 6はゼニゴケの数、1はスケール
 
     #ラズパイの特定
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
