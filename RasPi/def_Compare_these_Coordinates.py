@@ -79,7 +79,7 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
             for l in range(1,int(len(Today_Coordinates_List))):
                 if eval("List_ToCoordinates_YeCoordinates_r_num_%s[3] == num" % (l)):
                     #exec('print(List_ToCoordinates_YeCoordinates_r_num_%s[3])' % (l))
-                    #exec("Loser_ToCoordinates_List.append(List_ToCoordinates_YeCoordinates_r_num_%s[0])" % (l))
+                    exec("Loser_ToCoordinates_List.append(List_ToCoordinates_YeCoordinates_r_num_%s[0])" % (l))
                     print("List_ToCoordinates_YeCoordinates_r_num_%s[0]は昨日の%s番を指し示しています。" % (l,num))
                     #print(Loser_ToCoordinates_List)
                     if eval("List_ToCoordinates_YeCoordinates_r_num_%s[2] < Shortest_r" % (l)):
@@ -95,20 +95,20 @@ def Compare_these_Coordinates(Today_Coordinates_List, Yesterday_Coordinates_List
                     continue
 
                 Checked_Today_Coordinates_List[suitable_num_in_Today-1]=suitable_Coordinates
-                #print(Loser_ToCoordinates_List)
+                #print("Loser_ToCoordinates_List", Loser_ToCoordinates_List)
             for element in Loser_ToCoordinates_List:
                 if element == suitable_Coordinates: #Loser_ToCoordinates_Listははじき出された座標のリスト。suitableな座標は削除して"NA,NAに置き換え。"
-                    #print("%sをLoser_ToCoordinates_Listから削除します" % element)
+                    print("%sをLoser_ToCoordinates_Listから削除します" % element)
                     Loser_ToCoordinates_List.remove(element)
                     count_remove=count_remove+1
 
-        print(count_remove)
+        #print("count_remove", count_remove)
         for i in range(1,count_remove):
             Loser_ToCoordinates_List.append("NA")
 
         #print("Loser_ToCoordinates_List",Loser_ToCoordinates_List)
         #print("Checked_Today_Coordinates_List",Checked_Today_Coordinates_List)
-        print((len(Loser_ToCoordinates_List)-1))
+        print("(len(Loser_ToCoordinates_List)-1)", (len(Loser_ToCoordinates_List)-1))
         num=0
         count_for_Loser=0
         for element in Checked_Today_Coordinates_List:

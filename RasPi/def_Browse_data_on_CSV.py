@@ -43,7 +43,7 @@ def pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum):
         print(new_Difference)
         if (0 < int(new_Difference)) and (int(new_Difference) < int(Difference)):
             YESTERDAY=Date
-            print("YESTERDAYは%sに変更になりました。", YESTERDAY)
+            print("YESTERDAYは%sに変更になりました。" % YESTERDAY)
             DataFrame_Column_num=DataFrame_Column_num+1
     Latest_Data_on_csv=csv_input.iloc[DataFrame_Column_num-1,]
 

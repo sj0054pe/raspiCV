@@ -68,7 +68,7 @@ def draw_the_contours(fname, theDate, Season, RasPi_SerialNum): #輪郭を描写
     #↓面積導出関数へ渡す。
     gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #緑色を白、背景を黒にした二値化をする。(そうしないと輪郭抽出や他のOpenCVの関数で扱いずらい。)
 
-    #OpenCV3.0と4.0で使用が違うにで場合分け
+    #OpenCV3.0と4.0で使用が違うので場合分け
     try:
         contours,hierarchy=cv2.findContours(gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     except:

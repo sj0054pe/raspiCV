@@ -2,7 +2,6 @@ import subprocess
 
 def make_the_filename(theDate, Season, RasPi_SerialNum): #ファイル名を撮影日時する
     fname=RasPi_SerialNum+"_"+Season+"_"+theDate+'.png'
-    print(fname)
     return fname
 
 def take_the_picture(fname): #写真を撮影する
