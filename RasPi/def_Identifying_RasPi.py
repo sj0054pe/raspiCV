@@ -9,7 +9,7 @@ def manual_select():
     RasPi_dict[7]='c310a350' #c310a350は7
     RasPi_dict[1]='712d5dde' #712d5ddeは1
 
-    for i in range(1,8+1):
+    for i in range(1,8+1): #8はラズベリーパイの数
         print(i,",", RasPi_dict[i])
 
     RasPi_Number=input('どのRaspberryPiを選びますか?(数字を半角で入力) : ')
@@ -28,5 +28,5 @@ def Get_Serial(): #ラズパイのCPU晩報を取得する(各ラズパイを識
     f.close()
   except:
     cpuserial = "5ae9b47f" #テスト用CPU番号 #8番ラズペリーパイ
-    
+
   return cpuserial

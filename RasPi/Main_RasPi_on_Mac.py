@@ -17,8 +17,8 @@ TimeMeasurement = time.time()
 def main(theDate, RasPi_SerialNum):
     try:
         progress_num=0
-        Season="S9"
-        num_of_object=6+1 #ゼニゴケの個体数 + スケールオブジェクト(1個)
+        Season="S10"
+        num_of_object=8+1 #ゼニゴケの個体数 + スケールオブジェクト(1個)
 
         '''
         print("Check date...")
@@ -74,8 +74,8 @@ def main(theDate, RasPi_SerialNum):
         print("エラー　画像が見つかりません。")
 
 if __name__ == '__main__':
-    Start_Day="2019-12-05"
-    End_Day="2019-12-20"
+    Start_Day="2019-12-28"
+    End_Day="2020-01-14"
 
     Start_Day= datetime.strptime(Start_Day, '%Y-%m-%d')
 
