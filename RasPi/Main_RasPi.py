@@ -22,8 +22,8 @@ except:
 try:
     #初期設定
     progress_num=0 #プログラムの進行度を測る番号(main関数内のexcept時に使う。)
-    Season="S8" #シーズンごとに変更する。(いろんなモジュールに存在するSeasonはここから派生しているのでこの部分の変更をするだけでいい。)
-    num_of_object=8+1 #個体数 6はゼニゴケの数、1はスケール
+    Season="S11" #シーズンごとに変更する。(いろんなモジュールに存在するSeasonはここから派生しているのでこの部分の変更をするだけでいい。)
+    num_of_object=12+1 #個体数 6はゼニゴケの数、1はスケール
 
     #ラズパイの特定
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
