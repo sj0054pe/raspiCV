@@ -1,10 +1,12 @@
 import dropbox
+import csv
+import pandas as pd
 
 def Upload_on_Dropbox(API, Picname, RasPi_SerialNum): #DropboxのAPIを利用するためのテンプレ
     dbx = dropbox.Dropbox(API)
     dbx.users_get_current_account()
     print(Picname)
-    Desktop_Picname=Picname
+    Desktop_Picname="~/Desktop"+Picname
     Picname=Picname.split('.')
     Picname=str(Picname[0])+"_"+RasPi_SerialNum+'.png'
     f = open('../../%s' % Desktop_Picname, 'rb')
@@ -15,6 +17,23 @@ def Upload_on_Dropbox(API, Picname, RasPi_SerialNum): #DropboxのAPIを利用す
         dbx.files_upload(f.read(),'/Dropbox/アプリ/Mapoly_unFilter_%s/%s' % (RasPi_SerialNum,Desktop_Picname)) #dropbox内のディレクトリを書く
     f.close()
 
+def save_the_picture(RasPi_SerialNum, fname):
+    Information_csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Input/Information.csv", sep=",", index_col="RasPi_SerialNum",engine="python")
+    #print(Information_csv_input)
+    API_unFilter=Information_csv_input.loc[RasPi_SerialNum,"Dropbox_API_unFilter"]
+    API_Filter=Information_csv_input.loc[RasPi_SerialNum,"Dropbox_API_Filter"]
+
+    try:
+        Upload_on_Dropbox(API_unFilter, fname, RasPi_SerialNum) #Dropbox内に保存 ノーマルな写真
+    except:
+        print('すでに%sはDropbox上に保存してあります。' % fname)
+    try:
+        Upload_on_Dropbox(API_Area, 'Area_%s' % fname, RasPi_SerialNum) #輪郭を記述した写真
+    except:
+        print('すでにArea_%sはDropbox上に保存してあります。' % fname)
+
+
+'''
 def save_the_picture(RasPi_SerialNum, fname): #画像をクラウド(Dropbox)に保存する
     print('[RaspberryPi at %s]' % RasPi_SerialNum)
     if RasPi_SerialNum=='5324ee26':#5
@@ -43,7 +62,6 @@ def save_the_picture(RasPi_SerialNum, fname): #画像をクラウド(Dropbox)に
         API_Area='pnEJapb3mPAAAAAAAAABDn1HIdTjVeMU5fid_TaUhqksALt3l1QJZ5-9t3H5DHHO'
     else:
         return
-
     try:
         Upload_on_Dropbox(API_unFilter, fname, RasPi_SerialNum) #Dropbox内に保存 ノーマルな写真
     except:
@@ -52,3 +70,4 @@ def save_the_picture(RasPi_SerialNum, fname): #画像をクラウド(Dropbox)に
         Upload_on_Dropbox(API_Area, 'Area_%s' % fname, RasPi_SerialNum) #輪郭を記述した写真
     except:
         print('すでにArea_%sはDropbox上に保存してあります。' % fname)
+'''
