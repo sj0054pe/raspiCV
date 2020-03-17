@@ -7,19 +7,25 @@ import def_Identifying_RasPi
 import def_Send_the_message
 import def_Save_the_picture
 import def_finish
-
 import def_PhotoLINE
+
+import csv
+import pandas as pd
 
 from datetime import datetime, date, timedelta
 import time
 TimeMeasurement = time.time()
 
+def Setting():
+    #初期設定--------------------------------------------------------------------
+    Season="MAYO" #シーズンごとに変更する。(いろんなモジュールに存在するSeasonはここから派生しているのでこの部分の変更をするだけでいい。)
+    num_of_object=12+1 #1つのカメラで撮影する個体数。 12はゼニゴケの数、1はスケール
+    #---------------------------------------------------------------------------
+    return Season, num_of_object
+
 def main(theDate, RasPi_SerialNum):
     try:
         progress_num=0
-        Season="S5"
-        num_of_object=8+1 #ゼニゴケの個体数 + スケールオブジェクト(1個)
-
         '''
         print("Check date...")
         fname, theDate = def_datetime.check_the_date(Season, RasPi_SerialNum)
@@ -59,23 +65,29 @@ def main(theDate, RasPi_SerialNum):
         def_Send_the_message.send_message(RasPi_SerialNum, fname, Checked_Today_Area_List) #本番
         print("Sending Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
         print()
-
         '''
+
         print("Saving Picture...")
         def_Save_the_picture.save_the_picture(RasPi_SerialNum, fname) #本番
         print("Saved Pictures!   "+ str(time.time() - TimeMeasurement) + 'sec')
         print()
 
         print("finish program...")
-        def_finish.organize_on_Mac(fname, Season, RasPi_SerialNum)
+        #def_finish.organize_on_Mac(fname, Season, RasPi_SerialNum)
         print("Everything is fine!!! Done!!   "+ str(time.time() - TimeMeasurement) + 'sec')
 
     except:
         print("エラー　画像が見つかりません。")
 
 if __name__ == '__main__':
-    Start_Day="2019-08-31"
-    End_Day="2019-09-30"
+    Season, num_of_object=Setting()
+    #Information_csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Input/Information/Information_RasPi_and_API.csv", sep=",", index_col="RasPi_SerialNum",engine="python")
+    #print(Information_csv_input)
+    #API_unFilter=Information_csv_input.loc[RasPi_SerialNum,"Dropbox_API_unFilter"]
+    #API_Filter=Information_csv_input.loc[RasPi_SerialNum,"Dropbox_API_Filter"]
+
+    Start_Day="2019-09-03"
+    End_Day="2019-09-03"
 
     Start_Day= datetime.strptime(Start_Day, '%Y-%m-%d')
 
@@ -100,5 +112,5 @@ if __name__ == '__main__':
         #theDate=theDate+"-"+"07-00"
         #theDate=input('保存できてない日付を入力：')
 
-        print('---<%s>--------------------------------------------------' % theDate)
+        print('- -<%s>- - - - - - - - - - - - - - - - - - - - - - - - -' % theDate)
         main(theDate, RasPi_SerialNum)

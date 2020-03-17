@@ -16,7 +16,7 @@ def Record_Area(Area_List, Season,RasPi_SerialNum): #とりあえず従来の方
     for Elements in Area_List:
         Contours_Area=Elements
         csv_List.append(Contours_Area)
-    with open('Assets/Assets_Output/Conventional_Record_%s_on_%s.csv' % (Season,RasPi_SerialNum), 'a') as f: #Mac
+    with open('Assets/Assets_Output/rawdata_%s_on_%s.csv' % (Season,RasPi_SerialNum), 'a') as f: #Mac
         writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
         writer.writerow(csv_List)
 

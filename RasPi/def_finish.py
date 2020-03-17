@@ -26,6 +26,9 @@ def organize_on_RasPi(fname):
     os.remove('../../Contours_on_%s' % fname)
     try:
         os.remove('../../pre_Area_%s' % fname)
+    except:
+        print('remove に失敗')
+    try:
         os.remove('../../Area_%s' % fname)
     except:
         print('remove に失敗')

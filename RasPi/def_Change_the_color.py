@@ -13,5 +13,5 @@ def change_the_color(fname): #カラー画像を緑&黒の画像にする
     img_mask=cv2.inRange(hsv, lower_green, upper_green)
     # フレーム画像とマスク画像の共通の領域を抽出する。
     img_color=cv2.bitwise_and(frame, frame, mask=img_mask)
-    #下の関数へ受け渡すためにデスクトップに一時保存(後でremoveで消す。)
+    # 下の関数へ受け渡すためにデスクトップに一時保存(後でremoveで消す。)
     cv2.imwrite('../../Green.png', img_color) #Green.pngは黒色背景にジェンマの画像があります。

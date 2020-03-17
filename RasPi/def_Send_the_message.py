@@ -1,8 +1,11 @@
 import requests
+import csv
+import pandas as pd
 
 def send_message(RasPi_SerialNumber, fname, Checked_Today_Area_List): #LINEのAPIを利用するためのテンプレ(面積と画像を送信する)
     url = "https://notify-api.line.me/api/notify"   #line notifyでラズパイからlineに画像を送信
-    token = '2Rm15NEZNBO8A8kLZHAmKXBAk4fnwOnxQMJCknwdw4p'   #lineのtoken
+    Information_csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Input/Information/Information_RasPi_and_API.csv", sep=",", index_col="RasPi_SerialNum",engine="python")
+    token=Information_csv_input.loc[RasPi_SerialNum,"LINE_API"]
     headers = {"Authorization" : "Bearer "+ token}
     RasPi_Number='[picamera_%s]' % RasPi_SerialNumber
     Picname_LINE="Area_" + fname

@@ -4,10 +4,10 @@ import csv
 import def_Identifying_RasPi
 import def_Browse_data_on_CSV
 
-def pull_the_base_Coordinates(theDate, Season,RasPi_SerialNum):
+def pull_the_base_Coordinates(theDate, Season,RasPi_SerialNum, num_of_object):
     print("[スケールの検出]")
     role="Base"
-    Latest_Coordinates_List=def_Browse_data_on_CSV.pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum)
+    Latest_Coordinates_List=def_Browse_data_on_CSV.pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum, num_of_object)
 
     return Latest_Coordinates_List
 
@@ -27,7 +27,7 @@ def Record_the_base_object(Largest_object,Today_Dict,Season, theDate,RasPi_Seria
     except: #観察初日は参照する前日のデータがないので、csvファイルのヘッダーを作るところから始める。
         print("Base_Record_%s_on_%s.csvが存在しません。" % (Season,RasPi_SerialNum), sep=",")
         make_Header(Season,RasPi_SerialNum)
-        
+
     print('これからBaseを保存します。')
     Today_Dict_reverse = {v: k for k, v in Today_Dict.items()} #辞書のkey=座標,value=面積を逆にする。
 

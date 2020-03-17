@@ -7,23 +7,37 @@ import os
 
 import def_Identifying_RasPi
 
+'''
+def make_Header(role,Season, num_of_object,RasPi_SerialNum):
+    Header=[]
+    #RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
+    for i in range(num_of_object+1):
+        if i == 0:
+            Header.append("Date")
+        else:
+            Header.extend(["Area_%s" % i,"Coordinates_%s" % i])
+    print("Header", Header)
+    with open('Assets/Assets_Output/%s_Record_%s_on_%s.csv' % (role,Season,RasPi_SerialNum), 'a') as f: #Mac
+        writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
+        writer.writerow(Header)
+'''
+
 #csvファイルに保存されている直近の日付のデータを取り出す。
-def pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum):
+def pull_the_latest_Coordinates(theDate, Season, role,RasPi_SerialNum, num_of_object):
     #RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
     try:
-        print(theDate, Season, role, RasPi_SerialNum)
-        print("Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum))
+        #print("Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum))
         csv_input = pd.read_csv(filepath_or_buffer="Assets/Assets_Output/%s_Record_%s_on_%s.csv" % (role,Season,RasPi_SerialNum), sep=",", engine="python")
         print("%s_Record_%s_on_%s.csvを発見" % (role,Season,RasPi_SerialNum))
     except: #観察初日は参照する前日のデータがないので、csvファイルのヘッダーを作るところから始める。
-        #make_Header(Season)
-        print("%s_Record_%s_on_%s.csvは存在しません。" % (role,Season,RasPi_SerialNum))
+        #make_Header(role,Season, num_of_object,RasPi_SerialNum)
+        print("記録用csvファイル(%s_Record_%s_on_%s.csv)がありませんでした。" % (role,Season,RasPi_SerialNum))
         return "No_Data"
     #print(list(csv_input["Date"])) #csvファイルに保存されている日付の一覧を表示
     Date_List=list(csv_input["Date"])
-    print(csv_input)
+    #print(csv_input)
     YESTERDAY=Date_List[0] #print("START_DAY：", YESTERDAY_DAY) #csvファイルにある当日から直近の日付を調べる。まずは一番早い日から。
-    print('YESTERDAY : ', YESTERDAY)
+    #print('YESTERDAY : ', YESTERDAY)
 
     YESTERDAY=datetime.strptime(YESTERDAY, '%Y-%m-%d')
     theDate=datetime.strptime(theDate, '%Y-%m-%d')
