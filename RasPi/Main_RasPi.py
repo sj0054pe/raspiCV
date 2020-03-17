@@ -10,20 +10,21 @@ import def_Identifying_RasPi
 import def_Send_the_message
 import def_Save_the_picture
 import def_finish
-
 import def_PhotoLINE
 
 import os
 try:
-    os.chdir('/home/pi/Desktop/raspiCV/RasPi')
+    os.chdir('/home/pi/Desktop/raspiCV/RasPi') #cronを使うとプログラムの起動ディレクトリが時折変わるバグに対処
 except:
     print("ラズパイではありません。")
 
 try:
-    #初期設定
-    progress_num=0 #プログラムの進行度を測る番号(main関数内のexcept時に使う。)
+    #初期設定--------------------------------------------------------------------
     Season="S0" #シーズンごとに変更する。(いろんなモジュールに存在するSeasonはここから派生しているのでこの部分の変更をするだけでいい。)
-    num_of_object=12+1 #個体数 6はゼニゴケの数、1はスケール
+    num_of_object=12+1 #1つのカメラで撮影する個体数。 12はゼニゴケの数、1はスケール
+    #---------------------------------------------------------------------------
+
+    progress_num=0 #プログラムの進行度を測る番号(main関数内のexcept時に使う。)
 
     #ラズパイの特定
     RasPi_SerialNum=def_Identifying_RasPi.Get_Serial()
