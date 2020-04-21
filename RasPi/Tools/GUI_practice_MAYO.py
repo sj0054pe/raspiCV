@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 
 import tkinter as tk
-# python2の場合は、import Tkinter as tk
 import tkinter.ttk as ttk
-# python2の場合は、import ttk
 import sqlite3
 
 # 登録画面のGUI
-def create_gui():
+def HOME_gui():
+    def HOME_button():
+        root.destroy()
+        HOME_gui()
     # ----------------------------------------
     # コールバック関数群
     # ----------------------------------------
     # 表示ボタンが押下されたときのコールバック関数
-    def select_button(var):
+    def Base_Information_button():
         root.destroy()
-        if var==0:
-            Base_Information_gui()
-        elif var==1:
-            API_Information_gui()
+        Base_Information_gui()
+
+    def API_Information_button():
+        root.destroy()
+        API_Information_gui()
     # ----------------------------------------
     # 終了ボタンが押下されたときのコールバック関数
     def quit_button():
@@ -31,20 +33,19 @@ def create_gui():
     def createitemname():
         print('null')
 
-
     # rootフレームの設定
     root = tk.Tk()
     root.title("登録情報の修正画面")
-    root.geometry("250x280")
+    root.geometry("350x280")
 
     # メニューの設定
     frame = tk.Frame(root,bd=2,relief="ridge")
     frame.pack(fill="x")
-    button0 = tk.Button(frame,text="ホーム")
+    button0 = tk.Button(frame,text="ホーム",command=HOME_button)
     button0.pack(side="left")
-    button1 = tk.Button(frame,text="入力(基本設定)")
+    button1 = tk.Button(frame,text="入力(基本設定)",command=Base_Information_button)
     button1.pack(side="left")
-    button2 = tk.Button(frame,text="表示(API設定)",command=select_button)
+    button2 = tk.Button(frame,text="表示(API設定)",command=API_Information_button)
     button2.pack(side="left")
     button3 = tk.Button(frame,text="終了",command=quit_button)
     button3.pack(side="right")
@@ -70,7 +71,7 @@ def create_gui():
     rdo2.pack(side="left")
 
     # 登録ボタンの設定
-    button4 = tk.Button(root,text="登録(決定)",
+    button4 = tk.Button(root,text="決定",
                         font=("",16),
                         width=10,bg="gray",
                         command=lambda:select_button(var.get()))
@@ -78,15 +79,22 @@ def create_gui():
 
     root.mainloop()
 
-# 表示画面のGUI
+#基本設定
 def Base_Information_gui():
+    def HOME_button():
+        root.destroy()
+        HOME_gui()
     # ----------------------------------------
     # コールバック関数群
     # ----------------------------------------
-    # 登録ボタンが押下されたときのコールバック関数
-    def create_button():
+    # 表示ボタンが押下されたときのコールバック関数
+    def Base_Information_button():
         root.destroy()
-        create_gui()
+        Base_Information_gui()
+
+    def API_Information_button():
+        root.destroy()
+        API_Information_gui()
     # ----------------------------------------
     # 終了ボタンが押下されたときのコールバック関数
     def quit_button():
@@ -119,7 +127,6 @@ def Base_Information_gui():
                 tree.tag_configure(i,background="#CCFFFF")
             i+=1
     # ----------------------------------------
-
     # 空のデータベースを作成して接続する
     dbname = "database.db"
     c = sqlite3.connect(dbname)
@@ -133,9 +140,11 @@ def Base_Information_gui():
     # メニューの設定
     frame = tk.Frame(root,bd=2,relief="ridge")
     frame.pack(fill="x")
-    button1 = tk.Button(frame,text="入力(基本設定)",command=create_button)
+    button0 = tk.Button(frame,text="ホーム",command=HOME_button)
+    button0.pack(side="left")
+    button1 = tk.Button(frame,text="入力(基本設定)",command=Base_Information_button)
     button1.pack(side="left")
-    button2 = tk.Button(frame,text="表示(API設定)")
+    button2 = tk.Button(frame,text="表示(API設定)",command=API_Information_button)
     button2.pack(side="left")
     button3 = tk.Button(frame,text="終了",command=quit_button)
     button3.pack(side="right")
@@ -205,14 +214,22 @@ def Base_Information_gui():
     # メインループ
     root.mainloop()
 
+#API設定
 def API_Information_gui():
+    def HOME_button():
+        root.destroy()
+        HOME_gui()
     # ----------------------------------------
     # コールバック関数群
     # ----------------------------------------
-    # 登録ボタンが押下されたときのコールバック関数
-    def create_button():
+    # 表示ボタンが押下されたときのコールバック関数
+    def Base_Information_button():
         root.destroy()
-        create_gui()
+        Base_Information_gui()
+
+    def API_Information_button():
+        root.destroy()
+        API_Information_gui()
     # ----------------------------------------
     # 終了ボタンが押下されたときのコールバック関数
     def quit_button():
@@ -259,9 +276,11 @@ def API_Information_gui():
     # メニューの設定
     frame = tk.Frame(root,bd=2,relief="ridge")
     frame.pack(fill="x")
-    button1 = tk.Button(frame,text="入力(基本設定)",command=create_button)
+    button0 = tk.Button(frame,text="ホーム",command=HOME_button)
+    button0.pack(side="left")
+    button1 = tk.Button(frame,text="入力(基本設定)",command=Base_Information_button)
     button1.pack(side="left")
-    button2 = tk.Button(frame,text="表示(API設定)")
+    button2 = tk.Button(frame,text="表示(API設定)",command=API_Information_button)
     button2.pack(side="left")
     button3 = tk.Button(frame,text="終了",command=quit_button)
     button3.pack(side="right")
@@ -331,5 +350,9 @@ def API_Information_gui():
     # メインループ
     root.mainloop()
 
-# GUI画面の表示
-create_gui()
+
+def main():
+    HOME_gui()
+
+if __name__ == '__main__':
+    main()
