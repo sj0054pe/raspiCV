@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8cefe6a3-f894-4a17-9d53-f09f317d8485" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../RasPi/Tools/GUI_practice_MAYO.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../RasPi/Tools/GUI_practice_MAYO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SmartCity/Assets/Assets_Input/768x576.avi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SmartCity/src/Tools/HoG+SVM.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1gAX4ZJK1Lp2GHNKq1pzPCJjZ6U" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8cefe6a3-f894-4a17-9d53-f09f317d8485" name="Default Changelist" comment="" />
+      <created>1597558179895</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597558179895</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="638" y="465" key="com.intellij.ide.util.TipDialog" timestamp="1597558188623">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="638" y="465" key="com.intellij.ide.util.TipDialog/0.23.1280.777@0.23.1280.777" timestamp="1597558188623" />
+  </component>
+</project>
