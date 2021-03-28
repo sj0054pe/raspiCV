@@ -4,14 +4,19 @@
 ## Project Title
 RaspberryPiを用いた植物観測ツールの開発
 
+<img width="521" alt="スクリーンショット 2021-03-28 22 58 52" src="https://user-images.githubusercontent.com/49141417/112754895-3a33fd80-9019-11eb-83f4-f0124f5495f8.png">
+
 ## ソフトについて
 RaspberryPiのカメラで撮影した植物の画像から、画像認識を利用して葉の面積を導出させるソフト。
 
+![図1](https://user-images.githubusercontent.com/49141417/112754928-63ed2480-9019-11eb-9e9e-a9b27d0e5455.png)
+
 ## 機能
-面積導出はOpenCVを利用しました。  
-撮影された画像から、緑色部分の面積を導出しました。  
-面積は/Rits-genome-engineering/RasPi/Assets/Assets_Outputのcsvファイルに保存されます。(今後データベースに変更予定。)  
-撮影された画像はDropboxに保存されます。  
+面積の導出は画像処理ライブラリOpenCVを利用し、撮影した画像から緑色部分の面積を導出する。
+面積はcsvファイルとして/raspiCV/RasPi/Assets/Assets_Outputに保存する。(今後データベースに変更予定。)  
+撮影された画像はDropboxに保存し、ソフトウェアが正常処理するとLINEに通知します (失敗した場合も通知) 。 
+
+グラフを描画するソフトウェアも作成した。
 
 ## 各プログラムの概要
 モジュール化により複数のプログラムから構成されています。  
