@@ -46,4 +46,5 @@ def main():
     send_message(fname)
 
 if __name__ == '__main__':
+    print('mainを起動します。')
     main()
